@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Modules\Country\Http\Resources;
+namespace App\Modules\State\Http\Resources;
 
+use App\Modules\City\Http\Resources\CityResource;
+use App\Modules\City\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CountryResource extends JsonResource
+class StateResource extends JsonResource
 {
     private bool $withFullData = true;
 
@@ -29,6 +31,8 @@ class CountryResource extends JsonResource
                 $this->withFullData,
                 function () {
                     return [
+                        'city_id' => $this->city_id,
+                        'city' => (new CityResource(City::find($this->city_id)))->withFullData(false),
                         'created_at' => $this->created_at,
                         'updated_at' => $this->updated_at,
                         'deleted_at' => $this->deleted_at,

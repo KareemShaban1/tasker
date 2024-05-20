@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\Country\Providers;
+namespace App\Modules\State\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as BaseRouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 
-class CountryRouteServiceProvider extends BaseRouteServiceProvider
+class StateRouteServiceProvider extends BaseRouteServiceProvider
 {
-    public $namespace = 'App\Modules\Country\Http\Controllers\API';
+    public $namespace = 'App\Modules\State\Http\Controllers\API';
 
     public function map()
     {

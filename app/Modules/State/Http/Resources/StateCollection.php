@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Modules\Country\Http\Resources;
+namespace App\Modules\State\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class CountryCollection extends ResourceCollection
+class StateCollection extends ResourceCollection
 {
     private bool $withFullData = true;
 
