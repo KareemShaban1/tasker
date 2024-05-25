@@ -49,7 +49,7 @@ class LanguageService extends BaseService
         try {
 
             // $Language = Language::findOrFail($id);
-            return new LanguageResource(Language::with('language')->findOrFail($id));
+            return new LanguageResource(Language::findOrFail($id));
         } catch (\Exception $e) {
             return $this->handleException($e, __('message.Error happened while showing Language'));
         }
@@ -59,7 +59,7 @@ class LanguageService extends BaseService
     {
         try {
 
-            return new LanguageResource(Language::with('language')->findOrFail($id));
+            return new LanguageResource(Language::findOrFail($id));
 
 
         } catch (\Exception $e) {

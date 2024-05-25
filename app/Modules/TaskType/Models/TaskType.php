@@ -2,6 +2,7 @@
 
 namespace App\Modules\TaskType\Models;
 
+use App\Modules\Language\Models\Language;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,10 +26,10 @@ class TaskType extends Model
      */
     protected $fillable = ['type','is_active','language_id'];
 
-    // public function language()
-    // {
-    //     return $this->belongsTo(Language::class, 'language_id', 'id');
-    // }
+    public function language()
+    {
+        return $this->belongsTo(Language::class, 'language_id', 'id');
+    }
 
 
     // public function created_by()

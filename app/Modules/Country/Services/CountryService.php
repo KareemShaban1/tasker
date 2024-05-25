@@ -49,7 +49,7 @@ class CountryService extends BaseService
         try {
 
             // $country = Country::findOrFail($id);
-            return new CountryResource(Country::with('language')->findOrFail($id));
+            return new CountryResource(Country::findOrFail($id));
         } catch (\Exception $e) {
             return $this->handleException($e, __('message.Error happened while showing Country'));
         }
@@ -59,7 +59,7 @@ class CountryService extends BaseService
     {
         try {
 
-            return new CountryResource(Country::with('language')->findOrFail($id));
+            return new CountryResource(Country::findOrFail($id));
 
 
         } catch (\Exception $e) {

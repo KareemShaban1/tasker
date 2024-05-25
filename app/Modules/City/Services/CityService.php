@@ -49,7 +49,7 @@ class CityService extends BaseService
         try {
 
             // $city = City::findOrFail($id);
-            return new CityResource(City::with('language')->findOrFail($id));
+            return new CityResource(City::findOrFail($id));
         } catch (\Exception $e) {
             return $this->handleException($e, __('message.Error happened while showing City'));
         }
@@ -59,7 +59,7 @@ class CityService extends BaseService
     {
         try {
 
-            return new CityResource(City::with('language')->findOrFail($id));
+            return new CityResource(City::findOrFail($id));
 
 
         } catch (\Exception $e) {
