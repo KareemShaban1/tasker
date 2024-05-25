@@ -113,10 +113,11 @@ class StateService extends BaseService
     public function forceDelete($id)
     {
         try {
-            $state = State::findOrFail($id);
+            $state = State::withTrashed()->findOrFail($id);
             $state->forceDelete();
 
-            return new StateResource($state);
+            return $state;
+            // new StateResource($state);
 
 
         } catch (\Exception $e) {

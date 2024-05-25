@@ -113,10 +113,11 @@ class CityService extends BaseService
     public function forceDelete($id)
     {
         try {
-            $city = City::findOrFail($id);
+            $city = City::withTrashed()->findOrFail($id);
             $city->forceDelete();
 
-            return new CityResource($city);
+            return $city;
+            // new CityResource($city);
 
 
         } catch (\Exception $e) {

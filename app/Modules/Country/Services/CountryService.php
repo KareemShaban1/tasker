@@ -113,10 +113,11 @@ class CountryService extends BaseService
     public function forceDelete($id)
     {
         try {
-            $country = Country::findOrFail($id);
+            $country = Country::withTrashed()->findOrFail($id);
             $country->forceDelete();
 
-            return new CountryResource($country);
+            return $country;
+            // new CountryResource($country);
 
 
         } catch (\Exception $e) {

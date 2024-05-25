@@ -35,8 +35,8 @@ class LanguageService extends BaseService
     {
         try {
 
-            $Language = Language::create($data);
-            return new LanguageResource($Language);
+            $language = Language::create($data);
+            return new LanguageResource($language);
 
 
         } catch (\Exception $e) {
@@ -48,7 +48,7 @@ class LanguageService extends BaseService
     {
         try {
 
-            // $Language = Language::findOrFail($id);
+            // $language = Language::findOrFail($id);
             return new LanguageResource(Language::findOrFail($id));
         } catch (\Exception $e) {
             return $this->handleException($e, __('message.Error happened while showing Language'));
@@ -86,10 +86,10 @@ class LanguageService extends BaseService
     {
         try {
 
-            $Language = Language::findOrFail($id);
-            $Language->delete();
+            $language = Language::findOrFail($id);
+            $language->delete();
 
-            return new LanguageResource($Language);
+            return new LanguageResource($language);
 
         } catch (\Exception $e) {
             return $this->handleException($e, __('message.Error happened while deleting Language'));
@@ -100,10 +100,10 @@ class LanguageService extends BaseService
     {
         try {
 
-            $Language = Language::withTrashed()->findOrFail($id);
-            $Language->restore();
+            $language = Language::withTrashed()->findOrFail($id);
+            $language->restore();
 
-            return new LanguageResource($Language);
+            return new LanguageResource($language);
 
         } catch (\Exception $e) {
             return $this->handleException($e, __('message.Error happened while restoring Language'));
@@ -113,10 +113,11 @@ class LanguageService extends BaseService
     public function forceDelete($id)
     {
         try {
-            $Language = Language::findOrFail($id);
-            $Language->forceDelete();
+            $language = Language::withTrashed()->findOrFail($id);
+            $language->forceDelete();
 
-            return new LanguageResource($Language);
+            return $language;
+            // new LanguageResource($language);
 
 
         } catch (\Exception $e) {

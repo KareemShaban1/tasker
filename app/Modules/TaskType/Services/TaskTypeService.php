@@ -113,10 +113,11 @@ class TaskTypeService extends BaseService
     public function forceDelete($id)
     {
         try {
-            $taskType = TaskType::findOrFail($id);
+            $taskType = TaskType::withTrashed()->findOrFail($id);
             $taskType->forceDelete();
 
-            return new TaskTypeResource($taskType);
+            return $taskType;
+            // new TaskTypeResource($taskType);
 
 
         } catch (\Exception $e) {
