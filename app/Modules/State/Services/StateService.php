@@ -14,7 +14,7 @@ class StateService extends BaseService
         try {
 
 
-            $query = State::query();
+            $query = State::filter();
 
             $query = $query->with('city');
 

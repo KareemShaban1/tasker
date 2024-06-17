@@ -1,6 +1,14 @@
 <template>
-  <LanguageHeader :query="query" />
-  <div>
+  <Header
+  title="Language"
+  create-component
+  create-title="Create new language"
+  store="Language"
+  :query="query"
+  :selected-ids="selectedIds"
+  @clear-selected="updateSelectedIds"
+/>   
+<div>
     <VCard>
       <VCardText>
         <VTable>
@@ -56,14 +64,13 @@
 
 <script>
 import LanguageDetails from '@/pages/language/components/list/LanguageDetails.vue'
-import LanguageHeader from '@/pages/language/components/list/LanguageHeader.vue'
-import Pagination from '@/pages/language/components/list/PaginationLanguage.vue'
+import Header from "@/components/Header.vue"
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
   name: 'LanguageIndex',
-  components: { LanguageDetails, LanguageHeader, Pagination },
+  components: { LanguageDetails, Header },
 
   setup() {
     const store = useStore()
@@ -73,7 +80,7 @@ export default {
     const isLoading = computed(() => store.getters['Language/isLoading'])
 
     const fetchAll = () => {
-      store.dispatch('Language/fetchAllLanguages', query)
+      store.dispatch('Language/fetchAll', query)
     }
 
     onMounted(() => {

@@ -60,7 +60,7 @@ const getters = {
 }
 
 const actions = {
-  async fetchAllLanguages({ commit }, query = null) {
+  async fetchAll({ commit }, query = null) {
     try {
       commit('setIsLoading', true)
       await getLanguages(query)

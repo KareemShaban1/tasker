@@ -1,6 +1,14 @@
 <template>
-  <TaskTypeHeader :query="query" />
-  <div>
+  <Header
+  title="Task Type"
+  create-component
+  create-title="Create new task type"
+  store="TaskType"
+  :query="query"
+  :selected-ids="selectedIds"
+  @clear-selected="updateSelectedIds"
+/>
+<div>
     <VCard>
       <VCardText>
         <VTable>
@@ -11,6 +19,9 @@
               </th>
               <th class="text-capitalize">
                 Type
+              </th>
+              <th class="text-capitalize">
+                Language
               </th>
               <th class="text-capitalize">
                 created at
@@ -56,14 +67,13 @@
 
 <script>
 import TaskTypeDetails from '@/pages/taskType/components/list/TaskTypeDetails.vue'
-import TaskTypeHeader from '@/pages/taskType/components/list/TaskTypeHeader.vue'
-import Pagination from '@/pages/taskType/components/list/PaginationTaskType.vue'
+import Header from "@/components/Header.vue"
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
   name: 'TaskTypeIndex',
-  components: { TaskTypeDetails, TaskTypeHeader, Pagination },
+  components: { TaskTypeDetails, Header },
 
   setup() {
     const store = useStore()
@@ -73,7 +83,7 @@ export default {
     const isLoading = computed(() => store.getters['TaskType/isLoading'])
 
     const fetchAll = () => {
-      store.dispatch('TaskType/fetchAllTaskTypes', query)
+      store.dispatch('TaskType/fetchAll', query)
     }
 
     onMounted(() => {

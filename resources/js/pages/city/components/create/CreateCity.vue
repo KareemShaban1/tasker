@@ -78,7 +78,7 @@ export default {
     const submit = () => {
       if (validate(form)) {
         store.dispatch('City/storeCity', form.value).then(() => {
-          store.dispatch('City/fetchAllCities', getQueryParamsFromUrl())
+          store.dispatch('City/fetchAll', getQueryParamsFromUrl())
           resetForm()
         })
       } else {

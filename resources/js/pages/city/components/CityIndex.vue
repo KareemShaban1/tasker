@@ -1,6 +1,14 @@
 <template>
-  <CityHeader :query="query" />
-  <div>
+  <Header
+  title="City"
+  create-component
+  create-title="Create new city"
+  store="City"
+  :query="query"
+  :selected-ids="selectedIds"
+  @clear-selected="updateSelectedIds"
+/>   
+<div>
     <VCard>
       <VCardText>
         <VTable>
@@ -55,15 +63,14 @@
 
 <script>
 import CityDetails from "@/pages/city/components/list/CityDetails.vue"
-import CityHeader from "@/pages/city/components/list/CityHeader.vue"
-import Pagination from "@/pages/city/components/list/PaginationCity.vue"
+import Header from "@/components/Header.vue"
 import { computed } from "vue"
 import { useStore } from 'vuex'
 
 
 export default {
   name: 'CityIndex',
-  components: { CityDetails, CityHeader, Pagination },
+  components: { CityDetails, Header },
 
   setup() {
     const store = useStore()
@@ -73,7 +80,7 @@ export default {
     const isLoading = computed(() => store.getters['City/isLoading'])
 
     const fetchAll = () => {
-      store.dispatch('City/fetchAllCities', query)
+      store.dispatch('City/fetchAll', query)
     }
 
     onMounted(() => {

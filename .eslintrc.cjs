@@ -199,11 +199,11 @@ module.exports = {
           message: 'Use \'@styles\' path alias for importing styles from \'resources/js/assets/styles\'',
         },
 
-        {
-          id: 'Disallow icon of icon library',
-          regex: 'mdi-\\w',
-          message: 'Only \'remix\' icons are allowed',
-        },
+        // {
+        //   id: 'Disallow icon of icon library',
+        //   regex: 'mdi-\\w',
+        //   message: 'Only \'remix\' icons are allowed',
+        // },
 
         {
           regex: '@core/\\w',

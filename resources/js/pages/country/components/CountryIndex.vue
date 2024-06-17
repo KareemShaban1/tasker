@@ -1,6 +1,13 @@
 <template>
-  <CountryHeader :query="query" />
-  <div>
+  <Header
+  title="Country"
+  create-component
+  create-title="Create new country"
+  store="Country"
+  :query="query"
+  :selected-ids="selectedIds"
+  @clear-selected="updateSelectedIds"
+/>  <div>
     <VCard>
       <VCardText>
         <VTable>
@@ -52,7 +59,7 @@
 
 <script>
 import CountryDetails from "@/pages/country/components/list/CountryDetails.vue"
-import CountryHeader from "@/pages/country/components/list/CountryHeader.vue"
+import Header from "@/components/Header.vue"
 import Pagination from "@/pages/country/components/list/PaginationCountry.vue"
 import { computed } from "vue"
 import { useStore } from 'vuex'
@@ -60,7 +67,7 @@ import { useStore } from 'vuex'
 
 export default {
   name: 'CountryIndex',
-  components: { CountryDetails, CountryHeader, Pagination },
+  components: { CountryDetails, Header, Pagination },
 
   setup() {
     const store = useStore()
@@ -70,7 +77,7 @@ export default {
     const isLoading = computed(() => store.getters['Country/isLoading'])
 
     const fetchAll = () => {
-      store.dispatch('Country/fetchAllCountries', query)
+      store.dispatch('Country/fetchAll', query)
     }
 
     onMounted(() => {

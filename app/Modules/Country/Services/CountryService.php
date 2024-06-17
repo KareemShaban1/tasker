@@ -14,7 +14,7 @@ class CountryService extends BaseService
         try {
 
 
-            $query = Country::query();
+            $query = Country::filter();
 
             // $query = $query->with('');
 

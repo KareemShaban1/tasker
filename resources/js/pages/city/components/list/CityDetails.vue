@@ -94,7 +94,7 @@ export default {
   methods: {
     ...mapMutations("City", ["setIsUpdating"]),
 
-    ...mapActions('City', ['fetchAllCities', 'deleteCity', 'restoreCity', 'forceDeleteCity', 'editCity']),
+    ...mapActions('City', ['fetchAll', 'deleteCity', 'restoreCity', 'forceDeleteCity', 'editCity']),
 
     forceDeleteCityModal(id) {
       Swal.fire({
@@ -105,7 +105,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.forceDeleteCity(id).then(() => {
-            this.fetchAllCities(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -120,7 +120,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.deleteCity(id).then(() => {
-            this.fetchAllCities(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -135,7 +135,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.restoreCity(id).then(() => {
-            this.fetchAllCities(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -150,7 +150,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.deleteCity(id).then(() => {
-            this.fetchAllCities(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })

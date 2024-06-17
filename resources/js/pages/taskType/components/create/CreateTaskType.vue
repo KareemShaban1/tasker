@@ -102,7 +102,7 @@ export default {
     const submit = () => {
       if (validate(form)) {
         store.dispatch('TaskType/storeTaskType', form.value).then(() => {
-          store.dispatch('TaskType/fetchAllTaskTypes', getQueryParamsFromUrl())
+          store.dispatch('TaskType/fetchAll', getQueryParamsFromUrl())
           resetForm()
         })
       } else {

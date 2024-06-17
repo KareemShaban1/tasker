@@ -14,9 +14,7 @@ class TaskTypeService extends BaseService
         try {
 
 
-            $query = TaskType::query();
-
-            // $query = $query->with('');
+            $query = TaskType::with('language')->filter();
 
             $query = $this->withTrashed($query, $request);
 

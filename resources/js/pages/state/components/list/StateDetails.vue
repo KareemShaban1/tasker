@@ -94,7 +94,7 @@ export default {
   methods: {
     ...mapMutations("State", ["setIsUpdating"]),
 
-    ...mapActions('State', ['fetchAllStates', 'deleteState', 'restoreState', 'forceDeleteState', 'editState']),
+    ...mapActions('State', ['fetchAll', 'deleteState', 'restoreState', 'forceDeleteState', 'editState']),
 
     forceDeleteStateModal(id) {
       Swal.fire({
@@ -105,7 +105,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.forceDeleteState(id).then(() => {
-            this.fetchAllStates(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -120,7 +120,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.deleteState(id).then(() => {
-            this.fetchAllStates(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -135,7 +135,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.restoreState(id).then(() => {
-            this.fetchAllStates(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -150,7 +150,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.deleteState(id).then(() => {
-            this.fetchAllStates(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })

@@ -3,6 +3,7 @@
 namespace App\Modules\TaskType\Models;
 
 use App\Modules\Language\Models\Language;
+use App\Traits\Filter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,6 +12,7 @@ class TaskType extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Filter;
 
     /**
      * The table associated with the model.
@@ -18,6 +20,11 @@ class TaskType extends Model
      * @var string
      */
     protected $table = 'task_types';
+
+    public array $filterProperties = [
+        'type' => 'search',
+        'language_name' => ['language' => ['name'=> 'search']],
+    ];
 
     /**
      * The attributes that are mass assignable.

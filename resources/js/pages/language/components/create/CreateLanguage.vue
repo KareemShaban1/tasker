@@ -86,7 +86,7 @@ export default {
     const submit = () => {
       if (validate(form)) {
         store.dispatch('Language/storeLanguage', form.value).then(() => {
-          store.dispatch('Language/fetchAllLanguages', getQueryParamsFromUrl())
+          store.dispatch('Language/fetchAll', getQueryParamsFromUrl())
           resetForm()
         })
       } else {

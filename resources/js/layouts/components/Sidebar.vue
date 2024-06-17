@@ -125,6 +125,35 @@ const navItems = {
 
       // permissions: ['access-dashboard'],
     },
+    {
+      title: 'category',
+      icon: 'ri-task-line',
+      to: '/category',
+
+      // permissions: ['access-dashboard'],
+    },
+    {
+      title: 'specialty',
+      icon: 'ri-task-line',
+      to: '/specialty',
+
+      // permissions: ['access-dashboard'],
+    },
+
+    {
+      title: 'clients',
+      icon: 'ri-task-line',
+      to: '/client',
+
+      // permissions: ['access-dashboard'],
+    },
+    {
+      title: 'offers',
+      icon: 'ri-task-line',
+      to: '/offer',
+
+      // permissions: ['access-dashboard'],
+    },
   ],
 }
 </script>

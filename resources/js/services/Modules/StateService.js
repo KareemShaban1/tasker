@@ -2,6 +2,7 @@ import useHandler from '@/services/handler'
 import axios from 'axios'
 import { ref } from 'vue'
 import { useToast } from 'vue-toastification'
+import "vue-toastification/dist/index.css"
 
 const toast = useToast()
 

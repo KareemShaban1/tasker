@@ -60,7 +60,7 @@ const getters = {
 }
 
 const actions = {
-  async fetchAllCountries({ commit }, query = null) {
+  async fetchAll({ commit }, query = null) {
     try {
       commit('setIsLoading', true)
       await getCountries(query)

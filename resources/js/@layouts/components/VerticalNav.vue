@@ -1,11 +1,14 @@
 <script setup>
+import logo from '@images/logo.svg?raw'
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
 import { useDisplay } from 'vuetify'
-import logo from '@images/logo.svg?raw'
 
 const props = defineProps({
   tag: {
-    type: null,
+    type: [
+      String,
+      null,
+    ],
     required: false,
     default: 'aside',
   },
@@ -21,10 +24,6 @@ const props = defineProps({
 
 const { mdAndDown } = useDisplay()
 const refNav = ref()
-
-/*ℹ️ Close overlay side when route is changed
-Close overlay vertical nav when link is clicked
-*/
 const route = useRoute()
 
 watch(() => route.path, () => {
@@ -40,16 +39,15 @@ const handleNavScroll = evt => {
 </script>
 
 <template>
-  <!-- eslint-disable vue/no-v-html -->
   <Component
     :is="props.tag"
     ref="refNav"
-    class="layout-vertical-nav"
+    class="layout-vertical-nav overlay-nav"
     :class="[
       {
         'visible': isOverlayNavActive,
         'scrolled': isVerticalNavScrolled,
-        'overlay-nav': mdAndDown,
+        // 'overlay-nav': mdAndDown,
       },
     ]"
   >
@@ -58,7 +56,7 @@ const handleNavScroll = evt => {
       <slot name="nav-header">
         <RouterLink
           to="/"
-          class="app-logo app-title-wrapper"
+          class="app-logo d-flex align-center gap-x-3 app-title-wrapper"
         >
           <div
             class="d-flex"
@@ -66,7 +64,7 @@ const handleNavScroll = evt => {
           />
 
           <h1 class="font-weight-medium leading-normal text-xl text-uppercase">
-            Materio
+            Tasker
           </h1>
         </RouterLink>
       </slot>
@@ -92,21 +90,6 @@ const handleNavScroll = evt => {
   </Component>
 </template>
 
-<style lang="scss" scoped>
-.app-logo {
-  display: flex;
-  align-items: center;
-  column-gap: 0.75rem;
-
-  .app-logo-title {
-    font-size: 1.25rem;
-    font-weight: 500;
-    line-height: 1.75rem;
-    text-transform: uppercase;
-  }
-}
-</style>
-
 <style lang="scss">
 @use "@configured-variables" as variables;
 @use "@layouts/styles/mixins";
@@ -121,7 +104,7 @@ const handleNavScroll = evt => {
   inline-size: variables.$layout-vertical-nav-width;
   inset-block-start: 0;
   inset-inline-start: 0;
-  transition: inline-size 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  transition: transform 0.25s ease-in-out, inline-size 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
   will-change: transform, inline-size;
 
   .nav-header {
@@ -130,15 +113,6 @@ const handleNavScroll = evt => {
 
     .header-action {
       cursor: pointer;
-
-      @at-root {
-        #{variables.$selector-vertical-nav-mini} .nav-header .header-action {
-          &.nav-pin,
-          &.nav-unpin {
-            display: none !important;
-          }
-        }
-      }
     }
   }
 
@@ -169,11 +143,9 @@ const handleNavScroll = evt => {
       inline-size: variables.$layout-vertical-nav-collapsed-width;
     }
   }
-}
 
-// Small screen vertical nav transition
-@media (max-width:1279px) {
-  .layout-vertical-nav {
+  // 👉 Overlay nav
+  &.overlay-nav {
     &:not(.visible) {
       transform: translateX(-#{variables.$layout-vertical-nav-width});
 
@@ -181,8 +153,6 @@ const handleNavScroll = evt => {
         transform: translateX(variables.$layout-vertical-nav-width);
       }
     }
-
-    transition: transform 0.25s ease-in-out;
   }
 }
 </style>

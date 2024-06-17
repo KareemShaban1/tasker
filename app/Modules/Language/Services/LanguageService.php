@@ -14,9 +14,7 @@ class LanguageService extends BaseService
         try {
 
 
-            $query = Language::query();
-
-            // $query = $query->with('');
+            $query = Language::filter();
 
             $query = $this->withTrashed($query, $request);
 

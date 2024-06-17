@@ -5,6 +5,11 @@ import Language from '@/store/Modules/Language'
 import TaskType from '@/store/Modules/TaskType'
 import Vuex from 'vuex'
 import auth from './auth'
+import Category from '@/store/Modules/Category'
+import Specialty from '@/store/Modules/Specialty'
+import Client from '@/store/Modules/Client'
+import Offer from '@/store/Modules/Offer'
+
 
 export default new Vuex.Store({
   modules: {
@@ -14,5 +19,9 @@ export default new Vuex.Store({
     State,
     Language,
     TaskType,
+    Category,
+    Specialty,
+    Client,
+    Offer,
   },
 })

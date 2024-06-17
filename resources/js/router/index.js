@@ -8,25 +8,23 @@ async function isAuth() {
   const store = useStore()
   const toast = useToast()
 
-  // return await axiosIns
-  //   .get('/api/user')
-  //   .then(function (response) {
-  //     store.commit('auth/SET_AUTHENTICATED', true)
-  //     store.commit('auth/SET_USER', response.data)
-  //     return true
-  //   })
-  //   .catch(e => {
-  //     store.commit('auth/SET_AUTHENTICATED', false)
-  //     store.commit('auth/SET_USER', null)
-  //     console.log(e)
-  //     if (e.response && e.response.status === 401) {
-  //       console.log(e.response.status)
-  //       toast.error(e.response.data.message)
-  //     }
+  return await axiosIns.get('/api/user').then(function (response) {
+    store.commit('auth/SET_AUTHENTICATED', true)
+    store.commit('auth/SET_USER', response.data)
 
-  //     return false
-  //   })
-  return true
+    return true
+  }).catch(e => {
+    console.log(e)
+    
+    // store.commit('auth/SET_AUTHENTICATED', false)
+    // store.commit('auth/SET_USER', null)
+    if (e.response && e.response.status === 401) {
+      console.log(e.response.status)
+      toast.error(e.response.data.message)
+    }
+
+    return false
+  })
 }
 
 /* Layouts */
@@ -72,6 +70,39 @@ const router = createRouter({
           path: 'taskType',
           component: () => import('../pages/taskType/index.vue'),
           meta: { title: 'taskType' },
+        },
+        {
+          path: 'category',
+          component: () => import('../pages/category/index.vue'),
+          meta: { title: 'category' },
+        },
+        {
+          path: 'specialty',
+          component: () => import('../pages/specialty/index.vue'),
+          meta: { title: 'specialty' },
+        },
+        {
+          path: 'client',
+          component: () => import('../pages/client/index.vue'),
+          meta: { title: 'client' },
+        },
+        {
+          path: 'offer',
+          component: () => import('../pages/offer/index.vue'),
+          meta: { title: 'offer' },
+        },
+
+        {
+          path: '/logout',
+          name: 'logout',
+          meta: {
+            middleware: "logout",
+            title: `logout`,
+          },
+          beforeEnter: (to, from, next) => {
+            localStorage.clear()
+            sessionStorage.clear()
+          },
         },
       ],
     },
@@ -131,54 +162,40 @@ const router = createRouter({
 async function handelRoute(to, from, next) {
   try {
     var Auth = await isAuth()
-
-    if (to.fullPath == '/logout') {
-      // Clear localStorage
+    if (to.fullPath === "/logout") {
       localStorage.clear()
-
-      // Clear sessionStorage
       sessionStorage.clear()
-      console.log('loge out')
-      next({ name: 'login' })
+      next({ name: "login" })
     } else {
-      if (to.meta.middleware == 'guest') {
+      console.log("test")
+      if (to.meta.middleware === "guest") {
         if (Auth === true) {
-          next({ name: 'dashboard' })
+          next({ name: "dashboard" })
         } else {
           next()
         }
       } else {
         if (Auth === true) {
-          // if (await hasPermission(to.meta.permissions) === true) { // Corrected here
-          //   console.log('test 1')
-          //   next()
-          // } else {
-          //   console.log('test 2')
-          //   next({ name: "dashboard" })
-          // }
-
           next()
         } else {
-          next({ name: 'login' })
+          next({ name: "login" })
         }
       }
     }
   } catch (error) {
-    console.error('Error checking authentication:', error)
+    console.error("Error checking authentication:", error)
     next(false) // Abort navigation in case of an error
   }
 }
 
-router.beforeEach(async (to, from, next) => {
-  if (to.name) {
-    // Start the route progress bar.
-    NProgress.start()
-  }
+// router.beforeEach(async (to, from, next) => {
+//   if (to.name) {
+//     // NProgress.start()
+//   }
 
-  document.title = `${to.meta.title} - ${process.env.MIX_APP_NAME}`
-
-  await handelRoute(to, from, next)
-})
+//   // document.title = `${to.meta.title} - ${import.meta.env.VITE_APP_NAME}`
+//   await handelRoute(to, from, next)
+// })
 
 router.afterEach(() => {
   // Complete the animation of the route progress bar.

@@ -1,9 +1,31 @@
 <script setup>
-import avatar1 from '@images/avatars/avatar-1.png'
+import router from '@/router'
+import axiosIns from '@axios'
+import avatar1 from '@images/avatars/user-profile.png'
+import { useStore } from 'vuex'
+import useAuth from "@/services/Modules/Auth"
+
+const userData = ref()
+const isLoading = ref(true)
+const store = useStore()
+const { logout } = useAuth()
+
+onMounted(async () => {
+  userData.value = store.getters['auth/user']
+  isLoading.value = false
+})
 </script>
 
 <template>
+  <div v-if="isLoading">
+    <VProgressCircular
+      :size="40"
+      color="primary"
+      indeterminate
+    />
+  </div>
   <VBadge
+    v-else
     dot
     location="bottom right"
     offset-x="3"
@@ -47,19 +69,21 @@ import avatar1 from '@images/avatars/avatar-1.png'
               </VListItemAction>
             </template>
 
-            <VListItemTitle class="font-weight-semibold">
-              John Doe
+            <VListItemTitle class="font-weight-semibold text-capitalize">
+              {{ userData.name }}
             </VListItemTitle>
-            <VListItemSubtitle>Admin</VListItemSubtitle>
+            <VListItemSubtitle v-if="userData.guide_id">
+              {{ userData.guide ? userData.guide.name : '' }}
+            </VListItemSubtitle>
           </VListItem>
           <VDivider class="my-2" />
 
           <!-- 👉 Profile -->
-          <VListItem link>
+          <VListItem :to="`/user-profile/${userData.id}`">
             <template #prepend>
               <VIcon
                 class="me-2"
-                icon="ri-user-line"
+                icon="mdi-account-outline"
                 size="22"
               />
             </template>
@@ -68,11 +92,11 @@ import avatar1 from '@images/avatars/avatar-1.png'
           </VListItem>
 
           <!-- 👉 Settings -->
-          <VListItem link>
+          <VListItem to="/account-settings">
             <template #prepend>
               <VIcon
                 class="me-2"
-                icon="ri-settings-4-line"
+                icon="mdi-cog-outline"
                 size="22"
               />
             </template>
@@ -80,46 +104,30 @@ import avatar1 from '@images/avatars/avatar-1.png'
             <VListItemTitle>Settings</VListItemTitle>
           </VListItem>
 
-          <!-- 👉 Pricing -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="ri-money-dollar-circle-line"
-                size="22"
-              />
-            </template>
-
-            <VListItemTitle>Pricing</VListItemTitle>
-          </VListItem>
-
-          <!-- 👉 FAQ -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="ri-question-line"
-                size="22"
-              />
-            </template>
-
-            <VListItemTitle>FAQ</VListItemTitle>
-          </VListItem>
-
           <!-- Divider -->
           <VDivider class="my-2" />
 
           <!-- 👉 Logout -->
-          <VListItem to="/login">
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="ri-logout-box-r-line"
-                size="22"
-              />
-            </template>
+          <VListItem
+            class="text-center"
 
-            <VListItemTitle>Logout</VListItemTitle>
+            @click="logout"
+          >
+            <VBtn
+              variant="flat"
+              color="error"
+              size="small"
+            >
+              <template #prepend>
+                <VIcon
+                  class="me-2"
+                  icon="mdi-logout"
+                  size="22"
+                />
+              </template>
+
+              <VListItemTitle>Logout</VListItemTitle>
+            </VBtn>
           </VListItem>
         </VList>
       </VMenu>

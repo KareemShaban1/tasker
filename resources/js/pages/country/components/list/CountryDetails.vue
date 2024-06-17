@@ -91,7 +91,7 @@ export default {
   methods: {
     ...mapMutations("Country", ["setIsUpdating"]),
 
-    ...mapActions('Country', ['fetchAllCountries', 'deleteCountry', 'restoreCountry', 'forceDeleteCountry', 'editCountry']),
+    ...mapActions('Country', ['fetchAll', 'deleteCountry', 'restoreCountry', 'forceDeleteCountry', 'editCountry']),
 
     forceDeleteCountryModal(id) {
       Swal.fire({
@@ -102,7 +102,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.forceDeleteCountry(id).then(() => {
-            this.fetchAllCountries(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -117,7 +117,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.deleteCountry(id).then(() => {
-            this.fetchAllCountries(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -132,7 +132,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.restoreCountry(id).then(() => {
-            this.fetchAllCountries(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -147,7 +147,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.deleteCountry(id).then(() => {
-            this.fetchAllCountries(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })

@@ -90,7 +90,7 @@ export default {
     const submit = () => {
       if (validate(form)) {
         store.dispatch('Country/updateCountry', form.value).then(() => {
-          store.dispatch('Country/fetchAllCountries', getQueryParamsFromUrl())
+          store.dispatch('Country/fetchAll', getQueryParamsFromUrl())
           resetForm()
         })
       } else {

@@ -91,7 +91,7 @@ export default {
   methods: {
     ...mapMutations("Language", ["setIsUpdating"]),
 
-    ...mapActions('Language', ['fetchAllLanguages', 'deleteLanguage', 'restoreLanguage', 'forceDeleteLanguage', 'editLanguage']),
+    ...mapActions('Language', ['fetchAll', 'deleteLanguage', 'restoreLanguage', 'forceDeleteLanguage', 'editLanguage']),
 
     forceDeleteLanguageModal(id) {
       Swal.fire({
@@ -102,7 +102,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.forceDeleteLanguage(id).then(() => {
-            this.fetchAllLanguages(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -117,7 +117,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.deleteLanguage(id).then(() => {
-            this.fetchAllLanguages(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -132,7 +132,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.restoreLanguage(id).then(() => {
-            this.fetchAllLanguages(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -147,7 +147,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.deleteLanguage(id).then(() => {
-            this.fetchAllLanguages(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })

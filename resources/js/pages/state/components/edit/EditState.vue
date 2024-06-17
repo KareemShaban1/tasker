@@ -83,7 +83,7 @@ export default {
     const submit = () => {
       if (validate(form)) {
         store.dispatch('State/updateState', form.value).then(() => {
-          store.dispatch('State/fetchAllStates', getQueryParamsFromUrl())
+          store.dispatch('State/fetchAll', getQueryParamsFromUrl())
           resetForm()
         })
       } else {

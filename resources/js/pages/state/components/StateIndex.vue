@@ -1,5 +1,13 @@
 <template>
-  <StateHeader :query="query" />
+  <Header
+  title="State"
+  create-component
+  create-title="Create new state"
+  store="State"
+  :query="query"
+  :selected-ids="selectedIds"
+  @clear-selected="updateSelectedIds"
+/> 
   <div>
     <VCard>
       <VCardText>
@@ -55,15 +63,14 @@
 
 <script>
 import StateDetails from "@/pages/state/components/list/StateDetails.vue"
-import StateHeader from "@/pages/state/components/list/StateHeader.vue"
-import Pagination from "@/pages/state/components/list/PaginationState.vue"
+import Header from "@/components/Header.vue"
 import { computed } from "vue"
 import { useStore } from 'vuex'
 
 
 export default {
   name: 'StateIndex',
-  components: { StateDetails, StateHeader, Pagination },
+  components: { StateDetails, Header },
 
   setup() {
     const store = useStore()
@@ -73,7 +80,7 @@ export default {
     const isLoading = computed(() => store.getters['State/isLoading'])
 
     const fetchAll = () => {
-      store.dispatch('State/fetchAllStates', query)
+      store.dispatch('State/fetchAll', query)
     }
 
     onMounted(() => {

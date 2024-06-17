@@ -6,6 +6,9 @@
     {{ taskType.type }}
   </td>
   <td class="text-capitalize">
+    {{ taskType.language?.name }}
+  </td>
+  <td class="text-capitalize">
     <span class="date">{{ humanReadableDate(taskType.created_at).date }}</span>
     <br>
     <span class="time">{{ humanReadableDate(taskType.created_at).time }}</span>
@@ -91,7 +94,7 @@ export default {
   methods: {
     ...mapMutations("TaskType", ["setIsUpdating"]),
 
-    ...mapActions('TaskType', ['fetchAllTaskTypes', 'deleteTaskType', 'restoreTaskType', 'forceDeleteTaskType', 'editTaskType']),
+    ...mapActions('TaskType', ['fetchAll', 'deleteTaskType', 'restoreTaskType', 'forceDeleteTaskType', 'editTaskType']),
 
     forceDeleteTaskTypeModal(id) {
       Swal.fire({
@@ -102,7 +105,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.forceDeleteTaskType(id).then(() => {
-            this.fetchAllTaskTypes(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -117,7 +120,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.deleteTaskType(id).then(() => {
-            this.fetchAllTaskTypes(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -132,7 +135,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.restoreTaskType(id).then(() => {
-            this.fetchAllTaskTypes(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })
@@ -147,7 +150,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           this.deleteTaskType(id).then(() => {
-            this.fetchAllTaskTypes(getQueryParamsFromUrl())
+            this.fetchAll(getQueryParamsFromUrl())
           })
         }
       })

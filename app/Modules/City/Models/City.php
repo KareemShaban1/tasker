@@ -3,6 +3,7 @@
 namespace App\Modules\City\Models;
 
 use App\Modules\Country\Models\Country;
+use App\Traits\Filter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +12,7 @@ class City extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
+    use Filter;
     /**
     * The table associated with the model.
     *
@@ -19,6 +20,11 @@ class City extends Model
     */
     protected $table = 'cities';
 
+
+    public array $filterProperties = [
+        'name' => 'search',
+        'country_name' => ['country' => ['name' => 'search']],
+    ];
 
     /**
      * The attributes that are mass assignable.

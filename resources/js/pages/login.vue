@@ -1,16 +1,23 @@
 <script setup>
+import router from '@/router'
+import axiosIns from '@axios'
+import { computed, ref } from 'vue'
+import { useToast } from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
 import { useTheme } from 'vuetify'
-import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
-import logo from '@images/logo.svg?raw'
-import authV1MaskDark from '@images/pages/auth-v1-mask-dark.png'
-import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
-import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
-import authV1Tree from '@images/pages/auth-v1-tree.png'
+import { useStore } from 'vuex'
+
+import banner from '@images/auth/login-page.png'
+import footerBannerImg from '@images/auth/footer-banner-login.png'
+import footerImg from '@images/auth/footer-login.png'
+
+const store = useStore()
+const toast = useToast()
+const isLoading = ref(false)
 
 const form = ref({
   email: '',
   password: '',
-  remember: false,
 })
 
 const vuetifyTheme = useTheme()
@@ -20,140 +27,176 @@ const authThemeMask = computed(() => {
 })
 
 const isPasswordVisible = ref(false)
+
+const login = () => {
+  isLoading.value = true
+
+  axiosIns.post('/api/auth/login', {
+    email: form.value.email,
+    password: form.value.password,
+  })
+    .then(response => {
+      console.log('response >>>', response.data)
+      store.commit('auth/SET_AUTHENTICATED', true)
+      store.commit('auth/SET_USER', response.data.user)
+
+      const { message, accessToken } = response.data
+
+      localStorage.setItem('accessToken', JSON.stringify(accessToken))
+      router.push('/dashboard')
+    })
+    .catch(error => {
+      console.error(error)
+      toast.warning(error.response.data.message, { timeout: 2500 })
+    })
+    .finally(() => {
+      isLoading.value = false
+    })
+}
 </script>
 
-<template>
-  <!-- eslint-disable vue/no-v-html -->
 
-  <div class="auth-wrapper d-flex align-center justify-center pa-4">
-    <VCard
-      class="auth-card pa-4 pt-7"
-      max-width="448"
+<template> 
+  <VRow class="auth-wrapper">
+    <VCol
+      cols="12"
+      md="8"
+      class="d-none d-md-flex position-relative"
     >
-      <VCardItem class="justify-center">
-        <template #prepend>
-          <div class="d-flex">
-            <div v-html="logo" />
-          </div>
-        </template>
+      <div class="d-flex align-center justify-end w-100 h-100 pa-10 pe-0">
+        <VResponsive
+          class="auth-illustration"
+          :style="{ maxWidth: '797px' }"
+        >
+          <img
+            class="w-100 h-100"
+            style="object-fit: cover;"
+            :src="banner"
+            alt="Illustration"
+          >
+        </VResponsive>
+      </div>
+      <img
+        class="layout-blank auth-footer-mask"
+        height="360"
+        :src="footerBannerImg"
+        alt="Footer Mask"
+      >
+      <VResponsive
+        class="layout-blank auth-footer-tree"
+        img="footerImg"
+        style="height: 190px; width: 90px;"
+      >
+        <VImg
+          :src="footerImg"
+          alt="tree image"
+          style=""
+        />
+      </VResponsive>
+    </VCol>
+    <VCol
+      cols="12"
+      md="4"
+      class="auth-card-v2 d-flex align-center justify-center position-relative"
+      style="background-color: rgb(var(--v-theme-surface));"
+    >
+      <div
+        v-if="isLoading"
+        class="loading-page"
+      >
+        <VProgressCircular
+          :size="50"
+          indeterminate
+          color="primary"
+        />
+      </div>
+      <VCard
+        v-else
+        class="pa-4"
+        style="max-width: 500px;"
+      >
+        <div class="d-block d-md-none">
+          <VResponsive
+            class="auth-illustration"
+            :style="{ maxWidth: '500px' }"
+          >
+            <img
+              class="w-100 h-100"
+              style="object-fit: cover;"
+              :src="banner"
+              alt="Illustration"
+            >
+          </VResponsive>
+        </div>
+        <VCardText>
+          <h4 class="text-h4 mb-1">
+            Welcome to <span class="text-uppercase">crm!</span> 👋🏻
+          </h4>
+          <p class="mb-0">
+            Please sign-in to your account and start the adventure
+          </p>
+        </VCardText>
 
-        <VCardTitle class="font-weight-semibold text-2xl text-uppercase">
-          Materio
-        </VCardTitle>
-      </VCardItem>
-
-      <VCardText class="pt-2">
-        <h5 class="text-h5 font-weight-semibold mb-1">
-          Welcome to Materio! 👋🏻
-        </h5>
-        <p class="mb-0">
-          Please sign-in to your account and start the adventure
-        </p>
-      </VCardText>
-
-      <VCardText>
-        <VForm @submit.prevent="() => {}">
-          <VRow>
-            <!-- email -->
-            <VCol cols="12">
-              <VTextField
-                v-model="form.email"
-                label="Email"
-                type="email"
-              />
-            </VCol>
-
-            <!-- password -->
-            <VCol cols="12">
-              <VTextField
-                v-model="form.password"
-                label="Password"
-                placeholder="············"
-                :type="isPasswordVisible ? 'text' : 'password'"
-                :append-inner-icon="isPasswordVisible ? 'ri-eye-off-line' : 'ri-eye-line'"
-                @click:append-inner="isPasswordVisible = !isPasswordVisible"
-              />
-
-              <!-- remember me checkbox -->
-              <div class="d-flex align-center justify-space-between flex-wrap mt-1 mb-4">
-                <VCheckbox
-                  v-model="form.remember"
-                  label="Remember me"
+        <VCardText>
+          <VForm @submit.prevent="() => {}">
+            <VRow>
+              <VCol cols="12">
+                <VTextField
+                  v-model="form.email"
+                  label="Email"
+                  type="email"
                 />
+              </VCol>
+              <VCol cols="12">
+                <VTextField
+                  v-model="form.password"
+                  label="Password"
+                  :type="isPasswordVisible ? 'text' : 'password'"
+                  :append-inner-icon="isPasswordVisible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
+                  @click:append-inner="isPasswordVisible = !isPasswordVisible"
+                />
+              </VCol>
+            </VRow>
 
-                <a
-                  class="ms-2 mb-1"
-                  href="javascript:void(0)"
-                >
-                  Forgot Password?
-                </a>
-              </div>
-
-              <!-- login button -->
-              <VBtn
-                block
-                type="submit"
-                to="/"
-              >
-                Login
-              </VBtn>
-            </VCol>
-
-            <!-- create account -->
-            <VCol
-              cols="12"
-              class="text-center text-base"
+            <VBtn
+              type="submit"
+              :disabled="processing"
+              class="mt-4"
+              color="primary"
+              block
+              @click="login"
             >
-              <span>New on our platform?</span>
-              <RouterLink
-                class="text-primary ms-2"
-                to="/register"
-              >
-                Create an account
-              </RouterLink>
-            </VCol>
-
-            <VCol
-              cols="12"
-              class="d-flex align-center"
-            >
-              <VDivider />
-              <span class="mx-4">or</span>
-              <VDivider />
-            </VCol>
-
-            <!-- auth providers -->
-            <VCol
-              cols="12"
-              class="text-center"
-            >
-              <AuthProvider />
-            </VCol>
-          </VRow>
-        </VForm>
-      </VCardText>
-    </VCard>
-
-    <VImg
-      class="auth-footer-start-tree d-none d-md-block"
-      :src="authV1Tree"
-      :width="250"
-    />
-
-    <VImg
-      :src="authV1Tree2"
-      class="auth-footer-end-tree d-none d-md-block"
-      :width="350"
-    />
-
-    <!-- bg img -->
-    <VImg
-      class="auth-footer-mask d-none d-md-block"
-      :src="authThemeMask"
-    />
-  </div>
+              Login
+            </VBtn>
+          </VForm>
+        </VCardText>
+      </VCard>
+    </VCol>
+  </VRow>
 </template>
 
-<style lang="scss">
-@use "@core-scss/pages/page-auth.scss";
+<style scoped>
+.auth-wrapper {
+  min-block-size: 100dvh;
+  margin: 0;
+}
+
+.auth-illustration {
+  max-width: 797px;
+}
+
+.auth-card-v2 {
+  background-color: rgb(var(--v-theme-surface));
+}
+.layout-blank .auth-footer-tree {
+  position: absolute !important;
+  inset-inline-start: 70px;
+  inset-block-end: 70px;
+}
+.layout-blank .auth-footer-mask {
+  position: absolute;
+    inset-block-end: 0;
+    max-inline-size: 100%;
+    min-inline-size: 100%;
+}
 </style>
