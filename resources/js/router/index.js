@@ -188,14 +188,14 @@ async function handelRoute(to, from, next) {
   }
 }
 
-// router.beforeEach(async (to, from, next) => {
-//   if (to.name) {
-//     // NProgress.start()
-//   }
+router.beforeEach(async (to, from, next) => {
+  if (to.name) {
+    // NProgress.start()
+  }
 
-//   // document.title = `${to.meta.title} - ${import.meta.env.VITE_APP_NAME}`
-//   await handelRoute(to, from, next)
-// })
+  // document.title = `${to.meta.title} - ${import.meta.env.VITE_APP_NAME}`
+  await handelRoute(to, from, next)
+})
 
 router.afterEach(() => {
   // Complete the animation of the route progress bar.

@@ -60,14 +60,13 @@
 <script>
 import CountryDetails from "@/pages/country/components/list/CountryDetails.vue"
 import Header from "@/components/Header.vue"
-import Pagination from "@/pages/country/components/list/PaginationCountry.vue"
 import { computed } from "vue"
 import { useStore } from 'vuex'
 
 
 export default {
   name: 'CountryIndex',
-  components: { CountryDetails, Header, Pagination },
+  components: { CountryDetails, Header },
 
   setup() {
     const store = useStore()
