@@ -35,7 +35,7 @@
             >
               <LanguageDetails
                 :index="
-                  (languagesPaginatedData.pagination.current_page - 1) * languagesPaginatedData.pagination.per_page +
+                  (paginatedData.pagination.current_page - 1) * paginatedData.pagination.per_page +
                     index +
                     1
                 "
@@ -58,25 +58,26 @@
       </VCardText>
     </VCard>
 
-    <!-- <Pagination :query="query" /> -->
+    <PaginationComponent :query="query" store="Language" />
   </div>
 </template>
 
 <script>
 import LanguageDetails from '@/pages/language/components/list/LanguageDetails.vue'
+import PaginationComponent from '@/components/PaginationComponent.vue'
 import Header from "@/components/Header.vue"
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
   name: 'LanguageIndex',
-  components: { LanguageDetails, Header },
+  components: { LanguageDetails, Header, PaginationComponent },
 
   setup() {
     const store = useStore()
 
     const languages = computed(() => store.getters['Language/languagesList'])
-    const languagesPaginatedData = computed(() => store.getters['Language/languagesPaginatedData'])
+    const paginatedData = computed(() => store.getters['Language/paginatedData'])
     const isLoading = computed(() => store.getters['Language/isLoading'])
 
     const fetchAll = () => {
@@ -99,7 +100,7 @@ export default {
     return {
       query,
       languages,
-      languagesPaginatedData,
+      paginatedData,
       isLoading,
     }
   },

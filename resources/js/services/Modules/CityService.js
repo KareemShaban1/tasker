@@ -9,14 +9,14 @@ const toast = useToast()
 export default function useCities() {
   const { displayError, generateUrl, setPagination } = useHandler()
   const cities = ref([])
-  let citiesPaginatedData = ref(null)
+  let paginatedData = ref(null)
   const city = ref([])
 
   const getCities = async query => {
     try {
       let response = await axios.get(generateUrl('/api/cities', query))
       cities.value = response.data.data
-      citiesPaginatedData.value = setPagination(response)
+      paginatedData.value = setPagination(response)
     } catch (error) {
       displayError(error)
     }
@@ -79,7 +79,7 @@ export default function useCities() {
 
   return {
     cities,
-    citiesPaginatedData,
+    paginatedData,
     city,
     getCities,
     getCity,

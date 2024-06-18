@@ -6,7 +6,7 @@ const { displayError, setQueryParamsToUrl } = useHandler()
 const {
   categories,
   category,
-  categoriesPaginatedData,
+  paginatedData,
   getCategories,
   getCategory,
   storeCategory,
@@ -20,7 +20,7 @@ const {
 const state = () => ({
   categories: [],
   category: null,
-  categoriesPaginatedData: null,
+  paginatedData: null,
 
   isLoading: true,
   isCreating: false,
@@ -40,7 +40,7 @@ const state = () => ({
 const getters = {
   categoriesList: state => state.categories,
   category: state => state.category,
-  categoriesPaginatedData: state => state.categoriesPaginatedData,
+  paginatedData: state => state.paginatedData,
 
   isLoading: state => state.isLoading,
   isCreating: state => state.isCreating,
@@ -65,7 +65,7 @@ const actions = {
       commit('setIsLoading', true)
       await getCategories(query)
       commit('setCategories', categories.value)
-      commit('setCategoriesPaginatedData', categoriesPaginatedData.value)
+      commit('setCategoriesPaginatedData', paginatedData.value)
       commit('setIsLoading', false)
       setQueryParamsToUrl(query)
       commit('setFilterItems', { pagination: query?.per_page, category: query?.name_en, department: query?.department_name })
@@ -155,8 +155,8 @@ const mutations = {
     state.categories = categories
   },
 
-  setCategoriesPaginatedData: (state, categoriesPaginatedData) => {
-    state.categoriesPaginatedData = categoriesPaginatedData
+  setCategoriesPaginatedData: (state, paginatedData) => {
+    state.paginatedData = paginatedData
   },
 
   setCategoryDetail: (state, category) => {
@@ -180,7 +180,7 @@ const mutations = {
     state.updatedData = category
   },
   setDeleteCategory: (state, id) => {
-    state.categoriesPaginatedData.data.filter(x => x.id !== id)
+    state.paginatedData.data.filter(x => x.id !== id)
   },
 
   setHasFilter: (state, hasFilter) => {

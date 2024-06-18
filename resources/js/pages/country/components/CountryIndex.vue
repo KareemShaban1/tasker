@@ -33,7 +33,7 @@
               :key="country.id"
             >
               <CountryDetails
-                :index="(countriesPaginatedData.pagination.current_page - 1) * countriesPaginatedData.pagination.per_page + index + 1"
+                :index="(paginatedData.pagination.current_page - 1) * paginatedData.pagination.per_page + index + 1"
                 :country="country"
                 :query="query"
               />
@@ -53,12 +53,13 @@
       </VCardText>
     </VCard>
 
-    <!-- <Pagination :query="query" /> -->
+    <PaginationComponent :query="query" store="Country" />
   </div>
 </template>
 
 <script>
 import CountryDetails from "@/pages/country/components/list/CountryDetails.vue"
+import PaginationComponent from '@/components/PaginationComponent.vue'
 import Header from "@/components/Header.vue"
 import { computed } from "vue"
 import { useStore } from 'vuex'
@@ -66,13 +67,13 @@ import { useStore } from 'vuex'
 
 export default {
   name: 'CountryIndex',
-  components: { CountryDetails, Header },
+  components: { CountryDetails, Header, PaginationComponent },
 
   setup() {
     const store = useStore()
 
     const countries = computed(() => store.getters['Country/countriesList'])
-    const countriesPaginatedData = computed(() => store.getters['Country/countriesPaginatedData'])
+    const paginatedData = computed(() => store.getters['Country/paginatedData'])
     const isLoading = computed(() => store.getters['Country/isLoading'])
 
     const fetchAll = () => {
@@ -95,7 +96,7 @@ export default {
     return {
       query,
       countries,
-      countriesPaginatedData,
+      paginatedData,
       isLoading,
     }
   },

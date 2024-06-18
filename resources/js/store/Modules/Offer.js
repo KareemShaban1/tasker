@@ -6,7 +6,7 @@ const { displayError, setQueryParamsToUrl } = useHandler()
 const {
   offers,
   offer,
-  offersPaginatedData,
+  paginatedData,
   getOffers,
   getOffer,
   storeOffer,
@@ -20,7 +20,7 @@ const {
 const state = () => ({
   offers: [],
   offer: null,
-  offersPaginatedData: null,
+  paginatedData: null,
 
   isLoading: true,
   isCreating: false,
@@ -40,7 +40,7 @@ const state = () => ({
 const getters = {
   offersList: state => state.offers,
   offer: state => state.offer,
-  offersPaginatedData: state => state.offersPaginatedData,
+  paginatedData: state => state.paginatedData,
 
   isLoading: state => state.isLoading,
   isCreating: state => state.isCreating,
@@ -65,7 +65,7 @@ const actions = {
       commit('setIsLoading', true)
       await getOffers(query)
       commit('setOffers', offers.value)
-      commit('setOffersPaginatedData', offersPaginatedData.value)
+      commit('setOffersPaginatedData', paginatedData.value)
       commit('setIsLoading', false)
       setQueryParamsToUrl(query)
       commit('setFilterItems', { pagination: query?.per_page, offer: query?.name_en, department: query?.department_name })
@@ -155,8 +155,8 @@ const mutations = {
     state.offers = offers
   },
 
-  setOffersPaginatedData: (state, offersPaginatedData) => {
-    state.offersPaginatedData = offersPaginatedData
+  setOffersPaginatedData: (state, paginatedData) => {
+    state.paginatedData = paginatedData
   },
 
   setOfferDetail: (state, offer) => {
@@ -180,7 +180,7 @@ const mutations = {
     state.updatedData = offer
   },
   setDeleteOffer: (state, id) => {
-    state.offersPaginatedData.data.filter(x => x.id !== id)
+    state.paginatedData.data.filter(x => x.id !== id)
   },
 
   setHasFilter: (state, hasFilter) => {

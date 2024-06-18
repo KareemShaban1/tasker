@@ -37,7 +37,7 @@
               :key="client.id"
             >
               <ClientDetails
-                :index="(clientsPaginatedData.pagination.current_page - 1) * clientsPaginatedData.pagination.per_page + index + 1"
+                :index="(paginatedData.pagination.current_page - 1) * paginatedData.pagination.per_page + index + 1"
                 :client="client"
                 :query="query"
               />
@@ -57,12 +57,13 @@
       </VCardText>
     </VCard>
 
-    <!-- <Pagination :query="query" /> -->
+    <PaginationComponent :query="query" store="Client" />
   </div>
 </template>
 
 <script>
 import ClientDetails from "@/pages/client/components/list/ClientDetails.vue"
+import PaginationComponent from '@/components/PaginationComponent.vue'
 import Header from "@/components/Header.vue"
 import { computed } from "vue"
 import { useStore } from 'vuex'
@@ -70,13 +71,13 @@ import { useStore } from 'vuex'
 
 export default {
   name: 'ClientIndex',
-  components: { ClientDetails, Header },
+  components: { ClientDetails, Header, PaginationComponent },
 
   setup() {
     const store = useStore()
 
     const clients = computed(() => store.getters['Client/clientsList'])
-    const clientsPaginatedData = computed(() => store.getters['Client/clientsPaginatedData'])
+    const paginatedData = computed(() => store.getters['Client/paginatedData'])
     const isLoading = computed(() => store.getters['Client/isLoading'])
 
     const fetchAll = () => {
@@ -99,7 +100,7 @@ export default {
     return {
       query,
       clients,
-      clientsPaginatedData,
+      paginatedData,
       isLoading,
     }
   },

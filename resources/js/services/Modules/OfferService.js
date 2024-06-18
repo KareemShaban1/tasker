@@ -9,14 +9,14 @@ const toast = useToast()
 export default function useOffers() {
   const { displayError, generateUrl, setPagination } = useHandler()
   const offers = ref([])
-  let offersPaginatedData = ref(null)
+  let paginatedData = ref(null)
   const offer = ref([])
 
   const getOffers = async query => {
     try {
       let response = await axios.get(generateUrl('/api/offers', query))
       offers.value = response.data.data
-      offersPaginatedData.value = setPagination(response)
+      paginatedData.value = setPagination(response)
     } catch (error) {
       displayError(error)
     }
@@ -79,7 +79,7 @@ export default function useOffers() {
 
   return {
     offers,
-    offersPaginatedData,
+    paginatedData,
     offer,
     getOffers,
     getOffer,

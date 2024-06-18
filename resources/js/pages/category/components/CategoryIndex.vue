@@ -28,7 +28,7 @@
             >
               <CategoryDetails
                 :index="
-                  (categoriesPaginatedData.pagination.current_page - 1) * categoriesPaginatedData.pagination.per_page +
+                  (paginatedData.pagination.current_page - 1) * paginatedData.pagination.per_page +
                   index +
                   1
                 "
@@ -51,25 +51,26 @@
       </VCardText>
     </VCard>
 
-    <!-- <Pagination :query="query" /> -->
+    <PaginationComponent :query="query" store="Category"  />
   </div>
 </template>
 
 <script>
 import CategoryDetails from '@/pages/category/components/list/CategoryDetails.vue'
+import PaginationComponent from '@/components/PaginationComponent.vue'
 import Header from "@/components/Header.vue"
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
   name: 'CategoryIndex',
-  components: { CategoryDetails, Header },
+  components: { CategoryDetails, Header , PaginationComponent },
 
   setup() {
     const store = useStore()
 
     const categories = computed(() => store.getters['Category/categoriesList'])
-    const categoriesPaginatedData = computed(() => store.getters['Category/categoriesPaginatedData'])
+    const paginatedData = computed(() => store.getters['Category/paginatedData'])
     const isLoading = computed(() => store.getters['Category/isLoading'])
 
     const fetchAll = () => {
@@ -92,7 +93,7 @@ export default {
     return {
       query,
       categories,
-      categoriesPaginatedData,
+      paginatedData,
       isLoading,
     }
   },

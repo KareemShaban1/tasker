@@ -154,6 +154,14 @@ const navItems = {
 
       // permissions: ['access-dashboard'],
     },
+
+    {
+      title: 'tasks',
+      icon: 'ri-task-line',
+      to: '/task',
+
+      // permissions: ['access-dashboard'],
+    },
   ],
 }
 </script>

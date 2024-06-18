@@ -6,7 +6,7 @@ const { displayError, setQueryParamsToUrl } = useHandler()
 const {
   specialties,
   specialty,
-  specialtiesPaginatedData,
+  paginatedData,
   getSpecialties,
   getSpecialty,
   storeSpecialty,
@@ -20,7 +20,7 @@ const {
 const state = () => ({
   specialties: [],
   specialty: null,
-  specialtiesPaginatedData: null,
+  paginatedData: null,
 
   isLoading: true,
   isCreating: false,
@@ -40,7 +40,7 @@ const state = () => ({
 const getters = {
   specialtiesList: state => state.specialties,
   specialty: state => state.specialty,
-  specialtiesPaginatedData: state => state.specialtiesPaginatedData,
+  paginatedData: state => state.paginatedData,
 
   isLoading: state => state.isLoading,
   isCreating: state => state.isCreating,
@@ -65,7 +65,7 @@ const actions = {
       commit('setIsLoading', true)
       await getSpecialties(query)
       commit('setSpecialties', specialties.value)
-      commit('setSpecialtiesPaginatedData', specialtiesPaginatedData.value)
+      commit('setSpecialtiesPaginatedData', paginatedData.value)
       commit('setIsLoading', false)
       setQueryParamsToUrl(query)
       commit('setFilterItems', { pagination: query?.per_page, specialty: query?.name_en, department: query?.department_name })
@@ -155,8 +155,8 @@ const mutations = {
     state.specialties = specialties
   },
 
-  setSpecialtiesPaginatedData: (state, specialtiesPaginatedData) => {
-    state.specialtiesPaginatedData = specialtiesPaginatedData
+  setSpecialtiesPaginatedData: (state, paginatedData) => {
+    state.paginatedData = paginatedData
   },
 
   setSpecialtyDetail: (state, specialty) => {
@@ -180,7 +180,7 @@ const mutations = {
     state.updatedData = specialty
   },
   setDeleteSpecialty: (state, id) => {
-    state.specialtiesPaginatedData.data.filter(x => x.id !== id)
+    state.paginatedData.data.filter(x => x.id !== id)
   },
 
   setHasFilter: (state, hasFilter) => {

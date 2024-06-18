@@ -42,7 +42,7 @@ class ClientController extends Controller
     {
         // $this->authorize('create', Client::class);
 
-        $client = $this->service->store($request->all());
+        $client = $this->service->store($request);
         if ($client instanceof JsonResponse) {
             return $client;
         }

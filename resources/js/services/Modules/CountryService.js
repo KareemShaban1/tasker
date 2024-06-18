@@ -10,14 +10,14 @@ const toast = useToast()
 export default function useCountries() {
   const { displayError, generateUrl, setPagination } = useHandler()
   const countries = ref([])
-  let countriesPaginatedData = ref(null)
+  let paginatedData = ref(null)
   const country = ref([])
 
   const getCountries = async query => {
     try {
       let response = await axios.get(generateUrl('/api/countries', query))
       countries.value = response.data.data
-      countriesPaginatedData.value = setPagination(response)
+      paginatedData.value = setPagination(response)
     } catch (error) {
       displayError(error)
     }
@@ -80,7 +80,7 @@ export default function useCountries() {
 
   return {
     countries,
-    countriesPaginatedData,
+    paginatedData,
     country,
     getCountries,
     getCountry,

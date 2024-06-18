@@ -6,7 +6,7 @@ const { displayError, setQueryParamsToUrl } = useHandler()
 const {
   taskTypes,
   taskType,
-  taskTypesPaginatedData,
+  paginatedData,
   getTaskTypes,
   getTaskType,
   storeTaskType,
@@ -20,7 +20,7 @@ const {
 const state = () => ({
   taskTypes: [],
   taskType: null,
-  taskTypesPaginatedData: null,
+  paginatedData: null,
 
   isLoading: true,
   isCreating: false,
@@ -40,7 +40,7 @@ const state = () => ({
 const getters = {
   taskTypesList: state => state.taskTypes,
   taskType: state => state.taskType,
-  taskTypesPaginatedData: state => state.taskTypesPaginatedData,
+  paginatedData: state => state.paginatedData,
 
   isLoading: state => state.isLoading,
   isCreating: state => state.isCreating,
@@ -65,7 +65,7 @@ const actions = {
       commit('setIsLoading', true)
       await getTaskTypes(query)
       commit('setTaskTypes', taskTypes.value)
-      commit('setTaskTypesPaginatedData', taskTypesPaginatedData.value)
+      commit('setTaskTypesPaginatedData', paginatedData.value)
       commit('setIsLoading', false)
       setQueryParamsToUrl(query)
       commit('setFilterItems', { pagination: query?.per_page, taskType: query?.name_en, department: query?.department_name })
@@ -155,8 +155,8 @@ const mutations = {
     state.taskTypes = taskTypes
   },
 
-  setTaskTypesPaginatedData: (state, taskTypesPaginatedData) => {
-    state.taskTypesPaginatedData = taskTypesPaginatedData
+  setTaskTypesPaginatedData: (state, paginatedData) => {
+    state.paginatedData = paginatedData
   },
 
   setTaskTypeDetail: (state, taskType) => {
@@ -180,7 +180,7 @@ const mutations = {
     state.updatedData = taskType
   },
   setDeleteTaskType: (state, id) => {
-    state.taskTypesPaginatedData.data.filter(x => x.id !== id)
+    state.paginatedData.data.filter(x => x.id !== id)
   },
 
   setHasFilter: (state, hasFilter) => {

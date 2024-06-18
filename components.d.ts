@@ -15,6 +15,7 @@ declare module 'vue' {
     FilterComponent: typeof import('./resources/js/components/FilterComponent.vue')['default']
     Header: typeof import('./resources/js/components/Header.vue')['default']
     MoreBtn: typeof import('./resources/js/@core/components/MoreBtn.vue')['default']
+    PaginationComponent: typeof import('./resources/js/components/PaginationComponent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ShowFilterResult: typeof import('./resources/js/components/ShowFilterResult.vue')['default']

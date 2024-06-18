@@ -6,7 +6,7 @@ const { displayError, setQueryParamsToUrl } = useHandler()
 const {
   languages,
   language,
-  languagesPaginatedData,
+  paginatedData,
   getLanguages,
   getLanguage,
   storeLanguage,
@@ -20,7 +20,7 @@ const {
 const state = () => ({
   languages: [],
   language: null,
-  languagesPaginatedData: null,
+  paginatedData: null,
 
   isLoading: true,
   isCreating: false,
@@ -40,7 +40,7 @@ const state = () => ({
 const getters = {
   languagesList: state => state.languages,
   language: state => state.language,
-  languagesPaginatedData: state => state.languagesPaginatedData,
+  paginatedData: state => state.paginatedData,
 
   isLoading: state => state.isLoading,
   isCreating: state => state.isCreating,
@@ -65,7 +65,7 @@ const actions = {
       commit('setIsLoading', true)
       await getLanguages(query)
       commit('setLanguages', languages.value)
-      commit('setLanguagesPaginatedData', languagesPaginatedData.value)
+      commit('setLanguagesPaginatedData', paginatedData.value)
       commit('setIsLoading', false)
       setQueryParamsToUrl(query)
       commit('setFilterItems', { pagination: query?.per_page, language: query?.name_en, department: query?.department_name })
@@ -155,8 +155,8 @@ const mutations = {
     state.languages = languages
   },
 
-  setLanguagesPaginatedData: (state, languagesPaginatedData) => {
-    state.languagesPaginatedData = languagesPaginatedData
+  setLanguagesPaginatedData: (state, paginatedData) => {
+    state.paginatedData = paginatedData
   },
 
   setLanguageDetail: (state, language) => {
@@ -180,7 +180,7 @@ const mutations = {
     state.updatedData = language
   },
   setDeleteLanguage: (state, id) => {
-    state.languagesPaginatedData.data.filter(x => x.id !== id)
+    state.paginatedData.data.filter(x => x.id !== id)
   },
 
   setHasFilter: (state, hasFilter) => {

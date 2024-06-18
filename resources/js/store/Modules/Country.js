@@ -6,7 +6,7 @@ const { displayError, setQueryParamsToUrl } = useHandler()
 const {
   countries,
   country,
-  countriesPaginatedData,
+  paginatedData,
   getCountries,
   getCountry,
   storeCountry,
@@ -20,7 +20,7 @@ const {
 const state = () => ({
   countries: [],
   country: null,
-  countriesPaginatedData: null,
+  paginatedData: null,
 
   isLoading: true,
   isCreating: false,
@@ -40,7 +40,7 @@ const state = () => ({
 const getters = {
   countriesList: state => state.countries,
   country: state => state.country,
-  countriesPaginatedData: state => state.countriesPaginatedData,
+  paginatedData: state => state.paginatedData,
 
   isLoading: state => state.isLoading,
   isCreating: state => state.isCreating,
@@ -65,7 +65,7 @@ const actions = {
       commit('setIsLoading', true)
       await getCountries(query)
       commit('setCountries', countries.value)
-      commit('setCountriesPaginatedData', countriesPaginatedData.value)
+      commit('setCountriesPaginatedData', paginatedData.value)
       commit('setIsLoading', false)
       setQueryParamsToUrl(query)
       commit('setFilterItems', { pagination: query?.per_page, country: query?.name_en, department: query?.department_name })
@@ -155,8 +155,8 @@ const mutations = {
     state.countries = countries
   },
 
-  setCountriesPaginatedData: (state, countriesPaginatedData) => {
-    state.countriesPaginatedData = countriesPaginatedData
+  setCountriesPaginatedData: (state, paginatedData) => {
+    state.paginatedData = paginatedData
   },
 
   setCountryDetail: (state, country) => {
@@ -180,7 +180,7 @@ const mutations = {
     state.updatedData = country
   },
   setDeleteCountry: (state, id) => {
-    state.countriesPaginatedData.data.filter(x => x.id !== id)
+    state.paginatedData.data.filter(x => x.id !== id)
   },
 
   setHasFilter: (state, hasFilter) => {

@@ -6,6 +6,7 @@ use App\Modules\Client\Http\Resources\ClientCollection;
 use App\Modules\Client\Http\Resources\ClientResource;
 use App\Modules\Client\Models\Client;
 use App\Services\BaseService;
+use Illuminate\Support\Facades\Hash;
 
 class ClientService extends BaseService
 {
@@ -31,10 +32,12 @@ class ClientService extends BaseService
         }
     }
 
-    public function store($data)
+    public function store($request)
     {
         try {
 
+            $data = $request->all();
+            $data['password'] = Hash::make($request->password);
             $client = Client::create($data);
             return new ClientResource($client);
 

@@ -37,7 +37,7 @@
               :key="offer.id"
             >
               <OfferDetails
-                :index="(offersPaginatedData.pagination.current_page - 1) * offersPaginatedData.pagination.per_page + index + 1"
+                :index="(paginatedData.pagination.current_page - 1) * paginatedData.pagination.per_page + index + 1"
                 :offer="offer"
                 :query="query"
               />
@@ -57,12 +57,13 @@
       </VCardText>
     </VCard>
 
-    <!-- <Pagination :query="query" /> -->
+    <PaginationComponent :query="query" store="Offer"/>
   </div>
 </template>
 
 <script>
 import OfferDetails from "@/pages/offer/components/list/OfferDetails.vue"
+import PaginationComponent from '@/components/PaginationComponent.vue'
 import Header from "@/components/Header.vue"
 import { computed } from "vue"
 import { useStore } from 'vuex'
@@ -70,13 +71,13 @@ import { useStore } from 'vuex'
 
 export default {
   name: 'OfferIndex',
-  components: { OfferDetails, Header },
+  components: { OfferDetails, Header, PaginationComponent },
 
   setup() {
     const store = useStore()
 
     const offers = computed(() => store.getters['Offer/offersList'])
-    const offersPaginatedData = computed(() => store.getters['Offer/offersPaginatedData'])
+    const paginatedData = computed(() => store.getters['Offer/paginatedData'])
     const isLoading = computed(() => store.getters['Offer/isLoading'])
 
     const fetchAll = () => {
@@ -101,7 +102,7 @@ export default {
     return {
       query,
       offers,
-      offersPaginatedData,
+      paginatedData,
       isLoading,
     }
   },

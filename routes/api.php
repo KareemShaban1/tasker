@@ -24,8 +24,9 @@ Route::post('/sanctum/token', TokenController::class);
 
 
 Route::group(['prefix' => 'auth'], function () {
-          Route::post('login', [AuthController::class, 'login']);
-          Route::post('register', [AuthController::class, 'register']);
+    Route::post('userLogin', [AuthController::class, 'userLogin']);
+    Route::post('clientLogin', [AuthController::class, 'clientLogin']);
+    Route::post('register', [AuthController::class, 'register']);
 
 });
 

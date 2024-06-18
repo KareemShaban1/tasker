@@ -6,7 +6,7 @@ const { displayError, setQueryParamsToUrl } = useHandler()
 const {
   clients,
   client,
-  clientsPaginatedData,
+  paginatedData,
   getClients,
   getClient,
   storeClient,
@@ -20,7 +20,7 @@ const {
 const state = () => ({
   clients: [],
   client: null,
-  clientsPaginatedData: null,
+  paginatedData: null,
 
   isLoading: true,
   isCreating: false,
@@ -40,7 +40,7 @@ const state = () => ({
 const getters = {
   clientsList: state => state.clients,
   client: state => state.client,
-  clientsPaginatedData: state => state.clientsPaginatedData,
+  paginatedData: state => state.paginatedData,
 
   isLoading: state => state.isLoading,
   isCreating: state => state.isCreating,
@@ -65,7 +65,7 @@ const actions = {
       commit('setIsLoading', true)
       await getClients(query)
       commit('setClients', clients.value)
-      commit('setClientsPaginatedData', clientsPaginatedData.value)
+      commit('setClientsPaginatedData', paginatedData.value)
       commit('setIsLoading', false)
       setQueryParamsToUrl(query)
       commit('setFilterItems', { pagination: query?.per_page, client: query?.name_en, department: query?.department_name })
@@ -155,8 +155,8 @@ const mutations = {
     state.clients = clients
   },
 
-  setClientsPaginatedData: (state, clientsPaginatedData) => {
-    state.clientsPaginatedData = clientsPaginatedData
+  setClientsPaginatedData: (state, paginatedData) => {
+    state.paginatedData = paginatedData
   },
 
   setClientDetail: (state, client) => {
@@ -180,7 +180,7 @@ const mutations = {
     state.updatedData = client
   },
   setDeleteClient: (state, id) => {
-    state.clientsPaginatedData.data.filter(x => x.id !== id)
+    state.paginatedData.data.filter(x => x.id !== id)
   },
 
   setHasFilter: (state, hasFilter) => {

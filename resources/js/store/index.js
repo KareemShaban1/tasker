@@ -3,6 +3,7 @@ import City from '@/store/Modules/City'
 import State from '@/store/Modules/State'
 import Language from '@/store/Modules/Language'
 import TaskType from '@/store/Modules/TaskType'
+import Task from '@/store/Modules/Task'
 import Vuex from 'vuex'
 import auth from './auth'
 import Category from '@/store/Modules/Category'
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     State,
     Language,
     TaskType,
+    Task,
     Category,
     Specialty,
     Client,

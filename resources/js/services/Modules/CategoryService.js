@@ -9,14 +9,14 @@ const toast = useToast()
 export default function useCategories() {
   const { displayError, generateUrl, setPagination } = useHandler()
   const categories = ref([])
-  let categoriesPaginatedData = ref(null)
+  let paginatedData = ref(null)
   const category = ref([])
 
   const getCategories = async query => {
     try {
       let response = await axios.get(generateUrl('/api/categories', query))
       categories.value = response.data.data
-      categoriesPaginatedData.value = setPagination(response)
+      paginatedData.value = setPagination(response)
     } catch (error) {
       displayError(error)
     }
@@ -79,7 +79,7 @@ export default function useCategories() {
 
   return {
     categories,
-    categoriesPaginatedData,
+    paginatedData,
     category,
     getCategories,
     getCategory,

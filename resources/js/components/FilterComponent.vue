@@ -45,6 +45,7 @@ import City from "@/pages/city/components/list/FilterCard.vue"
 import State from "@/pages/state/components/list/FilterCard.vue"
 import Language from "@/pages/language/components/list/FilterCard.vue"
 import TaskType from "@/pages/taskType/components/list/FilterCard.vue"
+import Task from "@/pages/task/components/list/FilterCard.vue"
 import Category from "@/pages/category/components/list/FilterCard.vue"
 import Specialty from "@/pages/specialty/components/list/FilterCard.vue"
 import Client from "@/pages/client/components/list/FilterCard.vue"
@@ -62,6 +63,7 @@ export default {
     State,
     Language,
     TaskType,
+    Task,
     Category,
     Specialty,
     Client,

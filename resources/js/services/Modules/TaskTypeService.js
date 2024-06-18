@@ -9,14 +9,14 @@ const toast = useToast()
 export default function useTaskTypes() {
   const { displayError, generateUrl, setPagination } = useHandler()
   const taskTypes = ref([])
-  let taskTypesPaginatedData = ref(null)
+  let paginatedData = ref(null)
   const taskType = ref([])
 
   const getTaskTypes = async query => {
     try {
       let response = await axios.get(generateUrl('/api/taskTypes', query))
       taskTypes.value = response.data.data
-      taskTypesPaginatedData.value = setPagination(response)
+      paginatedData.value = setPagination(response)
     } catch (error) {
       displayError(error)
     }
@@ -79,7 +79,7 @@ export default function useTaskTypes() {
 
   return {
     taskTypes,
-    taskTypesPaginatedData,
+    paginatedData,
     taskType,
     getTaskTypes,
     getTaskType,

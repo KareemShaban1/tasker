@@ -9,14 +9,14 @@ const toast = useToast()
 export default function useSpecialties() {
   const { displayError, generateUrl, setPagination } = useHandler()
   const specialties = ref([])
-  let specialtiesPaginatedData = ref(null)
+  let paginatedData = ref(null)
   const specialty = ref([])
 
   const getSpecialties = async query => {
     try {
       let response = await axios.get(generateUrl('/api/specialties', query))
       specialties.value = response.data.data
-      specialtiesPaginatedData.value = setPagination(response)
+      paginatedData.value = setPagination(response)
     } catch (error) {
       displayError(error)
     }
@@ -79,7 +79,7 @@ export default function useSpecialties() {
 
   return {
     specialties,
-    specialtiesPaginatedData,
+    paginatedData,
     specialty,
     getSpecialties,
     getSpecialty,

@@ -10,14 +10,14 @@ const toast = useToast()
 export default function useClients() {
   const { displayError, generateUrl, setPagination } = useHandler()
   const clients = ref([])
-  let clientsPaginatedData = ref(null)
+  let paginatedData = ref(null)
   const client = ref([])
 
   const getClients = async query => {
     try {
       let response = await axios.get(generateUrl('/api/clients', query))
       clients.value = response.data.data
-      clientsPaginatedData.value = setPagination(response)
+      paginatedData.value = setPagination(response)
     } catch (error) {
       displayError(error)
     }
@@ -80,7 +80,7 @@ export default function useClients() {
 
   return {
     clients,
-    clientsPaginatedData,
+    paginatedData,
     client,
     getClients,
     getClient,

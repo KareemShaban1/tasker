@@ -34,7 +34,7 @@
               :key="specialty.id"
             >
               <SpecialtyDetails
-                :index="(specialtiesPaginatedData.pagination.current_page - 1) * specialtiesPaginatedData.pagination.per_page + index + 1"
+                :index="(paginatedData.pagination.current_page - 1) * paginatedData.pagination.per_page + index + 1"
                 :specialty="specialty"
                 :query="query"
               />
@@ -54,12 +54,13 @@
       </VCardText>
     </VCard>
 
-    <!-- <Pagination :query="query" /> -->
+    <PaginationComponent :query="query" store="Specialty" />
   </div>
 </template>
 
 <script>
 import SpecialtyDetails from "@/pages/specialty/components/list/SpecialtyDetails.vue"
+import PaginationComponent from '@/components/PaginationComponent.vue'
 import Header from "@/components/Header.vue"
 import { computed } from "vue"
 import { useStore } from 'vuex'
@@ -67,13 +68,13 @@ import { useStore } from 'vuex'
 
 export default {
   name: 'SpecialtyIndex',
-  components: { SpecialtyDetails, Header },
+  components: { SpecialtyDetails, Header, PaginationComponent },
 
   setup() {
     const store = useStore()
 
     const specialties = computed(() => store.getters['Specialty/specialtiesList'])
-    const specialtiesPaginatedData = computed(() => store.getters['Specialty/specialtiesPaginatedData'])
+    const paginatedData = computed(() => store.getters['Specialty/paginatedData'])
     const isLoading = computed(() => store.getters['Specialty/isLoading'])
 
     const fetchAll = () => {
@@ -96,7 +97,7 @@ export default {
     return {
       query,
       specialties,
-      specialtiesPaginatedData,
+      paginatedData,
       isLoading,
     }
   },

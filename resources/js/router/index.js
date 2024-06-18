@@ -16,8 +16,8 @@ async function isAuth() {
   }).catch(e => {
     console.log(e)
     
-    // store.commit('auth/SET_AUTHENTICATED', false)
-    // store.commit('auth/SET_USER', null)
+    store.commit('auth/SET_AUTHENTICATED', false)
+    store.commit('auth/SET_USER', null)
     if (e.response && e.response.status === 401) {
       console.log(e.response.status)
       toast.error(e.response.data.message)
@@ -90,6 +90,11 @@ const router = createRouter({
           path: 'offer',
           component: () => import('../pages/offer/index.vue'),
           meta: { title: 'offer' },
+        },
+        {
+          path: 'task',
+          component: () => import('../pages/task/index.vue'),
+          meta: { title: 'task' },
         },
 
         {

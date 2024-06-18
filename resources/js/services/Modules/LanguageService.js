@@ -9,14 +9,14 @@ const toast = useToast()
 export default function useLanguages() {
   const { displayError, generateUrl, setPagination } = useHandler()
   const languages = ref([])
-  let languagesPaginatedData = ref(null)
+  let paginatedData = ref(null)
   const language = ref([])
 
   const getLanguages = async query => {
     try {
       let response = await axios.get(generateUrl('/api/languages', query))
       languages.value = response.data.data
-      languagesPaginatedData.value = setPagination(response)
+      paginatedData.value = setPagination(response)
     } catch (error) {
       displayError(error)
     }
@@ -79,7 +79,7 @@ export default function useLanguages() {
 
   return {
     languages,
-    languagesPaginatedData,
+    paginatedData,
     language,
     getLanguages,
     getLanguage,
