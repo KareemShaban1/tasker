@@ -31,7 +31,7 @@ const isPasswordVisible = ref(false)
 const login = () => {
   isLoading.value = true
 
-  axiosIns.post('/api/auth/login', {
+  axiosIns.post('/api/auth/userLogin', {
     email: form.value.email,
     password: form.value.password,
   })
@@ -46,7 +46,7 @@ const login = () => {
       router.push('/dashboard')
     })
     .catch(error => {
-      console.error(error)
+      console.log(error)
       toast.warning(error.response.data.message, { timeout: 2500 })
     })
     .finally(() => {

@@ -95,9 +95,6 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         $user = $request->user();
-        // $permissions = $user->getPermissionsViaRoles()->pluck('name');
-        // $user->unsetRelation('roles');
-        // $data = array_merge($user->attributesToArray(), ['permissions' => $permissions]);
         return response()->json($user);
     }
 
