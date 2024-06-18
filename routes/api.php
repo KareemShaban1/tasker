@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/sanctum/token', TokenController::class);
 
 
+
+
 Route::group(['prefix' => 'auth'], function () {
     Route::post('userLogin', [AuthController::class, 'userLogin']);
     Route::post('clientLogin', [AuthController::class, 'clientLogin']);
@@ -31,6 +33,9 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/sanctum/csrf-cookie', function (Request $request) {
+        return response()->json(['token' => csrf_token()]);
+    });
     Route::get('user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
 }
