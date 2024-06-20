@@ -24,12 +24,17 @@ class CategoryController extends Controller
     {
         // $this->authorize('viewAny', Category::class);
 
-        $countries = $this->service->list($request);
-        if ($countries instanceof JsonResponse) {
-            return $countries;
+        $categories = $this->service->list($request);
+        if ($categories instanceof JsonResponse) {
+            return $categories;
         }
 
-        return $this->returnJSON($countries, __('message.Category has been created successfully'));
+        return $categories->additional([
+            'code' => 200,
+            'status' => 'success',
+            'message' =>  __('message.categories have been retrieved successfully'),
+        ]);
+        // return $this->returnJSON($categories, __('message.Category has been created successfully'));
 
     }
 
@@ -42,11 +47,11 @@ class CategoryController extends Controller
     {
         // $this->authorize('create', Category::class);
 
-        $country = $this->service->store($request->all());
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $category = $this->service->store($request->all());
+        if ($category instanceof JsonResponse) {
+            return $category;
         }
-        return $this->returnJSON($country, __('message.Category has been created successfully'));
+        return $this->returnJSON($category, __('message.Category has been created successfully'));
     }
 
     /**
@@ -56,11 +61,11 @@ class CategoryController extends Controller
     {
         // $this->authorize('view', Category::class);
 
-        $country = $this->service->show($id);
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $category = $this->service->show($id);
+        if ($category instanceof JsonResponse) {
+            return $category;
         }
-        return $this->returnJSON($country, __('message.Category has been retrieved successfully'));
+        return $this->returnJSON($category, __('message.Category has been retrieved successfully'));
     }
 
     /**
@@ -70,11 +75,11 @@ class CategoryController extends Controller
     {
         // $this->authorize('update', Category::class);
 
-        $country = $this->service->edit($id);
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $category = $this->service->edit($id);
+        if ($category instanceof JsonResponse) {
+            return $category;
         }
-        return $this->returnJSON($country, __('message.Category has been retrieved successfully'));
+        return $this->returnJSON($category, __('message.Category has been retrieved successfully'));
     }
 
     /**
@@ -84,11 +89,11 @@ class CategoryController extends Controller
     {
         // $this->authorize('update', Category::class);
 
-        $country = $this->service->update($request->validated(), $id);
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $category = $this->service->update($request->validated(), $id);
+        if ($category instanceof JsonResponse) {
+            return $category;
         }
-        return $this->returnJSON($country, __('message.Category has been updated successfully'));
+        return $this->returnJSON($category, __('message.Category has been updated successfully'));
     }
 
     /**
@@ -98,32 +103,32 @@ class CategoryController extends Controller
     {
         // $this->authorize('delete', Category::class);
 
-        $country = $this->service->destroy($id);
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $category = $this->service->destroy($id);
+        if ($category instanceof JsonResponse) {
+            return $category;
         }
-        return $this->returnJSON($country, __('message.Category has been deleted successfully'));
+        return $this->returnJSON($category, __('message.Category has been deleted successfully'));
     }
 
     public function restore($id): JsonResponse
     {
         // $this->authorize('restore', Category::class);
 
-        $country = $this->service->restore($id);
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $category = $this->service->restore($id);
+        if ($category instanceof JsonResponse) {
+            return $category;
         }
-        return $this->returnJSON($country, __('message.Category has been restored successfully'));
+        return $this->returnJSON($category, __('message.Category has been restored successfully'));
     }
 
     public function forceDelete($id): JsonResponse
     {
         // $this->authorize('forceDelete', Category::class);
 
-        $country = $this->service->forceDelete($id);
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $category = $this->service->forceDelete($id);
+        if ($category instanceof JsonResponse) {
+            return $category;
         }
-        return $this->returnJSON($country, __('message.Category has been force deleted successfully'));
+        return $this->returnJSON($category, __('message.Category has been force deleted successfully'));
     }
 }

@@ -3,10 +3,13 @@
 namespace App\Modules\TaskType\Models;
 
 use App\Modules\Language\Models\Language;
+use App\Modules\TaskType\Database\Factories\TaskTypeFactory;
+use App\Modules\User\Models\User;
 use App\Traits\Filter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaskType extends Model
 {
@@ -39,18 +42,24 @@ class TaskType extends Model
     }
 
 
-    // public function created_by()
-    // {
-    //     return $this->belongsTo(User::class, 'created_by', 'id');
-    // }
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 
-    // public function updated_by()
-    // {
-    //     return $this->belongsTo(User::class, 'updated_by', 'id');
-    // }
+    public function updated_by()
+    {
+        return $this->belongsTo(User::class, 'updated_by', 'id');
+    }
 
-    // public function deleted_by()
-    // {
-    //     return $this->belongsTo(User::class, 'deleted_by', 'id');
-    // }
+    public function deleted_by()
+    {
+        return $this->belongsTo(User::class, 'deleted_by', 'id');
+    }
+
+    public static function newFactory(): Factory
+    {
+        return new TaskTypeFactory();
+    }
+
 }

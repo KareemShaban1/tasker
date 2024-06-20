@@ -1,39 +1,52 @@
 <script setup>
-const statistics = [
-  {
-    title: 'Sales',
-    stats: '245k',
-    icon: 'ri-pie-chart-2-line',
-    color: 'primary',
-  },
-  {
-    title: 'Customers',
-    stats: '12.5k',
-    icon: 'ri-group-line',
-    color: 'success',
-  },
-  {
-    title: 'Product',
-    stats: '1.54k',
-    icon: 'ri-macbook-line',
-    color: 'warning',
-  },
-  {
-    title: 'Revenue',
-    stats: '$88k',
-    icon: 'ri-money-dollar-circle-line',
-    color: 'info',
-  },
-]
+import { ref, watch, onMounted } from 'vue'
+import useDashboard from '@/services/Modules/DashboardService'
+
+const { data, getData } = useDashboard()
+const statistics = ref([])
+
+// Function to update statistics based on data
+const updateStatistics = () => {
+  statistics.value = [
+    {
+      title: 'Categories',
+      stats: data.value?.categories ?? 'N/A',
+     
+      icon: 'ri-pie-chart-2-line',
+      color: 'success',
+    },
+    {
+      title: 'Clients',
+      stats: data.value?.clients ?? 'N/A',
+       icon: 'ri-group-line',
+      color: 'primary',
+    },
+    {
+      title: 'Tasks',
+      stats: data.value?.tasks ?? 'N/A',
+      icon: 'ri-task-line',
+      color: 'warning',
+    },
+    {
+      title: 'Offers',
+      stats: data.value?.offers ?? 'N/A',
+      icon: 'ri-money-dollar-circle-line',
+      color: 'info',
+    },
+  ]
+}
+
+// Watch for changes in the data and update statistics
+watch(data, updateStatistics)
+
+// Fetch data on component mount
+onMounted(() => {
+  getData()
+})
 </script>
 
 <template>
-  <VCard title="Transactions">
-    <template #subtitle>
-      <p class="text-body-1 mb-0">
-        <span class="d-inline-block font-weight-medium text-high-emphasis">Total 48.5% Growth</span> <span class="text-high-emphasis">😎</span> this month
-      </p>
-    </template>
+  <VCard title="Statistics">
 
     <template #append>
       <IconBtn class="mt-n5">
@@ -44,7 +57,7 @@ const statistics = [
       </IconBtn>
     </template>
 
-    <VCardText class="pt-10">
+    <VCardText class="pt-5">
       <VRow>
         <VCol
           v-for="item in statistics"

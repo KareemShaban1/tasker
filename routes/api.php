@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,6 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('userLogin', [AuthController::class, 'userLogin']);
     Route::post('clientLogin', [AuthController::class, 'clientLogin']);
     Route::post('register', [AuthController::class, 'register']);
-
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         return response()->json(['token' => csrf_token()]);
     });
     Route::get('user', [AuthController::class, 'user']);
+    Route::get('dashboard', [DashboardController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
 }
 );

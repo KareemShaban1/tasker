@@ -3,6 +3,7 @@
 namespace App\Modules\Client\Models;
 
 use App\Modules\City\Models\City;
+use App\Modules\Client\Database\Factories\ClientFactory;
 use App\Modules\Country\Models\Country;
 use App\Modules\State\Models\State;
 use App\Traits\Filter;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class Client extends Authenticatable
 {
@@ -49,5 +51,10 @@ class Client extends Authenticatable
     }
     public function state(){
         return $this->belongsTo(State::class);
+    }
+
+    public static function newFactory(): Factory
+    {
+        return new ClientFactory();
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <VDialog max-width="800">
-    <VCard title="Create new country">
+    <VCard title="Create new city">
       <VCardText>
         <VRow>
           <VCol
@@ -56,7 +56,7 @@
 import { onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import useHandler from '@/services/handler'
-import useValidator from '@/pages/country/Validator'
+import useValidator from '@/pages/city/Validator'
 import useCountries from '@/services/Modules/CountryService'
 import { useToast } from 'vue-toastification'
 

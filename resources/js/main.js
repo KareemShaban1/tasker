@@ -13,6 +13,8 @@ import router from '@/router'
 import store from './store'
 import vuetify from '@/plugins/vuetify'
 import 'remixicon/fonts/remixicon.css'
+import NProgress from 'nprogress'
+import "nprogress/nprogress.css"
 
 // Create vue app
 const app = createApp(App)
@@ -20,6 +22,7 @@ const app = createApp(App)
 app.use(Vuex)
 app.use(vuetify)
 app.use(router)
+app.use(NProgress)
 app.use(store)
 app.use(Toast, {
   transition: 'Vue-Toastification__bounce',

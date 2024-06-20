@@ -15,9 +15,33 @@
               @focus="errors.name = ''"
             />
           </VCol>
+
+          <VCol
+            cols="12"
+            md="12"
+          >
+            <VTextField
+              v-model="form.description"
+              label="Description"
+              :error-messages="errors.description"
+              @click:clear="errors.description = ''"
+              @focus="errors.description = ''"
+            />
+          </VCol>
+
+          <!-- <VCol cols="12">
+            <label for="">Description</label>
+            <div :class="{ 'error-ql-container': messageBody }">
+              <QuillEditor
+                v-model:content="description.editor"
+                theme="snow"
+                toolbar="essential"
+                content-type="html"
+              />
+            </div>
+          </VCol> -->
         </VRow>
-        
-          <VRow>
+        <VRow>
           <VCol
           cols="12"
           md="6"
@@ -40,7 +64,6 @@
           </div>
           </VCol>
           </VRow> 
-       
       </VCardText>
       <VDivider />
       <div class="d-flex flex-wrap justify-space-between my-1 mx-4">

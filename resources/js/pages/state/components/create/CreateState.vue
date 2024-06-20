@@ -18,7 +18,7 @@
           <VCol cols="12">
             <VAutocomplete
               v-model="form.city_id"
-              label="State"
+              label="City"
               :items="cities"
               item-title="name"
               item-value="id"

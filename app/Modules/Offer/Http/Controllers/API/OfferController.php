@@ -28,7 +28,13 @@ class OfferController extends Controller
             return $offers;
         }
 
-        return $this->returnJSON($offers, __('message.Offers has been created successfully'));
+        
+        return $offers->additional([
+            'code' => 200,
+            'status' => 'success',
+            'message' =>  __('message.offers have been retrieved successfully'),
+        ]);
+        // return $this->returnJSON($offers, __('message.Offers has been created successfully'));
 
     }
 

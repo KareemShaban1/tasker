@@ -5,13 +5,13 @@ import NProgress from 'nprogress'
 const accessToken = localStorage.getItem('accessToken') ?? ''
 
 const axiosIns = axios.create({
-  // baseURL: 'http://127.0.0.1:8000/',
+  baseURL: 'http://127.0.0.1:8000/',
 
   /*
   this live server
  */
 
-  baseURL: 'https://tasker.kareemsoft.online/',
+  // baseURL: 'https://tasker.kareemsoft.online/',
 
   withCredentials: true,
 

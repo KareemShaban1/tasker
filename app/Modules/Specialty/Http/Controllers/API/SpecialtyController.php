@@ -25,12 +25,18 @@ class SpecialtyController extends Controller
     {
         // $this->authorize('viewAny', Specialty::class);
 
-        $countries = $this->service->list($request);
-        if ($countries instanceof JsonResponse) {
-            return $countries;
+        $specialties = $this->service->list($request);
+        if ($specialties instanceof JsonResponse) {
+            return $specialties;
         }
 
-        return $this->returnJSON($countries, __('message.Specialty has been created successfully'));
+        
+        return $specialties->additional([
+            'code' => 200,
+            'status' => 'success',
+            'message' =>  __('message.specialties have been retrieved successfully'),
+        ]);
+        // return $this->returnJSON($specialties, __('message.Specialty has been created successfully'));
 
     }
 
@@ -43,11 +49,11 @@ class SpecialtyController extends Controller
     {
         // $this->authorize('create', Specialty::class);
 
-        $country = $this->service->store($request->all());
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $specialty = $this->service->store($request->all());
+        if ($specialty instanceof JsonResponse) {
+            return $specialty;
         }
-        return $this->returnJSON($country, __('message.Specialty has been created successfully'));
+        return $this->returnJSON($specialty, __('message.Specialty has been created successfully'));
     }
 
     /**
@@ -57,11 +63,11 @@ class SpecialtyController extends Controller
     {
         // $this->authorize('view', Specialty::class);
 
-        $country = $this->service->show($id);
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $specialty = $this->service->show($id);
+        if ($specialty instanceof JsonResponse) {
+            return $specialty;
         }
-        return $this->returnJSON($country, __('message.Specialty has been retrieved successfully'));
+        return $this->returnJSON($specialty, __('message.Specialty has been retrieved successfully'));
     }
 
     /**
@@ -71,11 +77,11 @@ class SpecialtyController extends Controller
     {
         // $this->authorize('update', Specialty::class);
 
-        $country = $this->service->edit($id);
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $specialty = $this->service->edit($id);
+        if ($specialty instanceof JsonResponse) {
+            return $specialty;
         }
-        return $this->returnJSON($country, __('message.Specialty has been retrieved successfully'));
+        return $this->returnJSON($specialty, __('message.Specialty has been retrieved successfully'));
     }
 
     /**
@@ -85,11 +91,11 @@ class SpecialtyController extends Controller
     {
         // $this->authorize('update', Specialty::class);
 
-        $country = $this->service->update($request->validated(), $id);
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $specialty = $this->service->update($request->validated(), $id);
+        if ($specialty instanceof JsonResponse) {
+            return $specialty;
         }
-        return $this->returnJSON($country, __('message.Specialty has been updated successfully'));
+        return $this->returnJSON($specialty, __('message.Specialty has been updated successfully'));
     }
 
     /**
@@ -99,32 +105,32 @@ class SpecialtyController extends Controller
     {
         // $this->authorize('delete', Specialty::class);
 
-        $country = $this->service->destroy($id);
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $specialty = $this->service->destroy($id);
+        if ($specialty instanceof JsonResponse) {
+            return $specialty;
         }
-        return $this->returnJSON($country, __('message.Specialty has been deleted successfully'));
+        return $this->returnJSON($specialty, __('message.Specialty has been deleted successfully'));
     }
 
     public function restore($id): JsonResponse
     {
         // $this->authorize('restore', Specialty::class);
 
-        $country = $this->service->restore($id);
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $specialty = $this->service->restore($id);
+        if ($specialty instanceof JsonResponse) {
+            return $specialty;
         }
-        return $this->returnJSON($country, __('message.Specialty has been restored successfully'));
+        return $this->returnJSON($specialty, __('message.Specialty has been restored successfully'));
     }
 
     public function forceDelete($id): JsonResponse
     {
         // $this->authorize('forceDelete', Specialty::class);
 
-        $country = $this->service->forceDelete($id);
-        if ($country instanceof JsonResponse) {
-            return $country;
+        $specialty = $this->service->forceDelete($id);
+        if ($specialty instanceof JsonResponse) {
+            return $specialty;
         }
-        return $this->returnJSON($country, __('message.Specialty has been force deleted successfully'));
+        return $this->returnJSON($specialty, __('message.Specialty has been force deleted successfully'));
     }
 }

@@ -68,11 +68,36 @@
             md="6"
           >
             <VTextField
+              v-model="form.password"
+              label="Password"
+              :error-messages="errors.password"
+              @click:clear="errors.password = ''"
+              @focus="errors.password = ''"
+            />
+          </VCol>
+          <VCol
+            cols="12"
+            md="6"
+          >
+            <VTextField
               v-model="form.phone"
               label="Phone"
               :error-messages="errors.phone"
               @click:clear="errors.phone = ''"
               @focus="errors.phone = ''"
+            />
+          </VCol>
+          
+          <VCol
+            cols="12"
+            md="6"
+          >
+            <VTextField
+              v-model="form.source"
+              label="Source"
+              :error-messages="errors.source"
+              @click:clear="errors.source = ''"
+              @focus="errors.source = ''"
             />
           </VCol>
           <VCol
@@ -107,7 +132,6 @@
               @focus="errors.city_id = ''"
             />
           </VCol>
-
           <VCol
             cols="12"
             md="4"
@@ -122,18 +146,6 @@
               :error-messages="errors.state_id"
               @click:clear="errors.state_id = ''"
               @focus="errors.state_id = ''"
-            />
-          </VCol>
-          <VCol
-            cols="12"
-            md="6"
-          >
-            <VTextField
-              v-model="form.source"
-              label="Source"
-              :error-messages="errors.source"
-              @click:clear="errors.source = ''"
-              @focus="errors.source = ''"
             />
           </VCol>
           <VCol
@@ -237,6 +249,7 @@ export default {
     const resetForm = () => {
       form.value.name = "",
       form.value.email = "",
+      form.value.password = "",
       form.value.phone = "",
       form.value.country_id = "",
       form.value.client_id = "",

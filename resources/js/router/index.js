@@ -98,6 +98,12 @@ const router = createRouter({
         },
 
         {
+          path: 'user',
+          component: () => import('../pages/user/index.vue'),
+          meta: { title: 'user' },
+        },
+
+        {
           path: '/logout',
           name: 'logout',
           meta: {
@@ -110,23 +116,6 @@ const router = createRouter({
           },
         },
       ],
-    },
-
-    {
-      path: '/logout',
-      meta: {
-        middleware: 'logout',
-        title: `logout`,
-      },
-      beforeEnter: (to, from, next) => {
-        // Clear localStorage
-        localStorage.clear()
-
-        sessionStorage.clear()
-        console.log('loge out')
-
-        // next("login")
-      },
     },
 
     {

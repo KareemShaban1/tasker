@@ -30,13 +30,13 @@ class TaskTypeController extends Controller
             return $taskTypes;
         }
 
-        return $this->returnJSON($taskTypes, __('message.taskType has been created successfully'));
+        // return $this->returnJSON($taskTypes, __('message.taskType has been created successfully'));
 
-        // return $taskTypes->additional([
-        //     'code' => 200,
-        //     'status' => 'success',
-        //     'message' =>  __('message.taskTypes have been retrieved successfully'),
-        // ]);
+        return $taskTypes->additional([
+            'code' => 200,
+            'status' => 'success',
+            'message' =>  __('message.taskTypes have been retrieved successfully'),
+        ]);
     }
 
 

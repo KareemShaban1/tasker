@@ -6,7 +6,7 @@ export default function useValidator() {
   const validationRules = [
     {
       property: 'name',
-      rules: [rules.required, rules.englishLetters],
+      rules: [rules.required],
     },
   ]
 

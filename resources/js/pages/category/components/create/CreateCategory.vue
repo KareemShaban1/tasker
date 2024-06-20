@@ -1,6 +1,6 @@
 <template>
   <VDialog max-width="800">
-    <VCard title="Create new country">
+    <VCard title="Create new category">
       <VCardText>
         <VRow>
           <VCol
@@ -105,7 +105,7 @@
 import { onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import useHandler from '@/services/handler'
-import useValidator from '@/pages/country/Validator'
+import useValidator from '@/pages/category/Validator'
 import useCategories from '@/services/Modules/CategoryService'
 import useTaskTypes from '@/services/Modules/TaskTypeService'
 import useLanguages from '@/services/Modules/LanguageService'

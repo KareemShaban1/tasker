@@ -7,11 +7,14 @@ use App\Modules\Client\Models\Client;
 use App\Modules\Country\Models\Country;
 use App\Modules\Language\Models\Language;
 use App\Modules\State\Models\State;
+use App\Modules\Task\Database\Factories\TaskFactory;
 use App\Traits\Filter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
 class Task extends Model
 {
     use HasFactory;
@@ -84,5 +87,9 @@ class Task extends Model
         return $this->belongsTo(State::class);
     }
 
+    public static function newFactory(): Factory
+    {
+        return new TaskFactory();
+    }
 
 }

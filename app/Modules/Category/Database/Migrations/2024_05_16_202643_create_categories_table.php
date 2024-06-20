@@ -12,7 +12,6 @@ return new class () extends Migration {
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            // varchar(255)
             $table->string('name');
             $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->foreignId('task_type_id')->constrained('task_types')->cascadeOnDelete();

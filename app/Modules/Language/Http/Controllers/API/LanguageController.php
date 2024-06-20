@@ -24,18 +24,18 @@ class LanguageController extends Controller
     {
         // $this->authorize('viewAny', Language::class);
 
-        $Languages = $this->service->list($request);
-        if ($Languages instanceof JsonResponse) {
-            return $Languages;
+        $languages = $this->service->list($request);
+        if ($languages instanceof JsonResponse) {
+            return $languages;
         }
 
-        return $this->returnJSON($Languages, __('message.Language has been created successfully'));
+        // return $this->returnJSON($languages, __('message.Language has been created successfully'));
 
-        // return $Languages->additional([
-        //     'code' => 200,
-        //     'status' => 'success',
-        //     'message' =>  __('message.Languages have been retrieved successfully'),
-        // ]);
+        return $languages->additional([
+            'code' => 200,
+            'status' => 'success',
+            'message' =>  __('message.languages have been retrieved successfully'),
+        ]);
     }
 
 
@@ -47,11 +47,11 @@ class LanguageController extends Controller
     {
         // $this->authorize('create', Language::class);
 
-        $Language = $this->service->store($request->all());
-        if ($Language instanceof JsonResponse) {
-            return $Language;
+        $language = $this->service->store($request->all());
+        if ($language instanceof JsonResponse) {
+            return $language;
         }
-        return $this->returnJSON($Language, __('message.Language has been created successfully'));
+        return $this->returnJSON($language, __('message.Language has been created successfully'));
     }
 
     /**
@@ -61,11 +61,11 @@ class LanguageController extends Controller
     {
         // $this->authorize('view', Language::class);
 
-        $Language = $this->service->show($id);
-        if ($Language instanceof JsonResponse) {
-            return $Language;
+        $language = $this->service->show($id);
+        if ($language instanceof JsonResponse) {
+            return $language;
         }
-        return $this->returnJSON($Language, __('message.Language has been retrieved successfully'));
+        return $this->returnJSON($language, __('message.Language has been retrieved successfully'));
     }
 
     /**
@@ -75,11 +75,11 @@ class LanguageController extends Controller
     {
         // $this->authorize('update', Language::class);
 
-        $Language = $this->service->edit($id);
-        if ($Language instanceof JsonResponse) {
-            return $Language;
+        $language = $this->service->edit($id);
+        if ($language instanceof JsonResponse) {
+            return $language;
         }
-        return $this->returnJSON($Language, __('message.Language has been retrieved successfully'));
+        return $this->returnJSON($language, __('message.Language has been retrieved successfully'));
     }
 
     /**
@@ -89,11 +89,11 @@ class LanguageController extends Controller
     {
         // $this->authorize('update', Language::class);
 
-        $Language = $this->service->update($request->validated(), $id);
-        if ($Language instanceof JsonResponse) {
-            return $Language;
+        $language = $this->service->update($request->validated(), $id);
+        if ($language instanceof JsonResponse) {
+            return $language;
         }
-        return $this->returnJSON($Language, __('message.Language has been updated successfully'));
+        return $this->returnJSON($language, __('message.Language has been updated successfully'));
     }
 
     /**
@@ -103,32 +103,32 @@ class LanguageController extends Controller
     {
         // $this->authorize('delete', Language::class);
 
-        $Language = $this->service->destroy($id);
-        if ($Language instanceof JsonResponse) {
-            return $Language;
+        $language = $this->service->destroy($id);
+        if ($language instanceof JsonResponse) {
+            return $language;
         }
-        return $this->returnJSON($Language, __('message.Language has been deleted successfully'));
+        return $this->returnJSON($language, __('message.Language has been deleted successfully'));
     }
 
     public function restore($id): JsonResponse
     {
         // $this->authorize('restore', Language::class);
 
-        $Language = $this->service->restore($id);
-        if ($Language instanceof JsonResponse) {
-            return $Language;
+        $language = $this->service->restore($id);
+        if ($language instanceof JsonResponse) {
+            return $language;
         }
-        return $this->returnJSON($Language, __('message.Language has been restored successfully'));
+        return $this->returnJSON($language, __('message.Language has been restored successfully'));
     }
 
     public function forceDelete($id): JsonResponse
     {
         // $this->authorize('forceDelete', Language::class);
 
-        $Language = $this->service->forceDelete($id);
-        if ($Language instanceof JsonResponse) {
-            return $Language;
+        $language = $this->service->forceDelete($id);
+        if ($language instanceof JsonResponse) {
+            return $language;
         }
-        return $this->returnJSON($Language, __('message.Language has been force deleted successfully'));
+        return $this->returnJSON($language, __('message.Language has been force deleted successfully'));
     }
 }

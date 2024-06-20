@@ -49,6 +49,7 @@ import Task from "@/pages/task/components/list/FilterCard.vue"
 import Category from "@/pages/category/components/list/FilterCard.vue"
 import Specialty from "@/pages/specialty/components/list/FilterCard.vue"
 import Client from "@/pages/client/components/list/FilterCard.vue"
+import User from "@/pages/user/components/list/FilterCard.vue"
 
 import useHandler from "@/services/handler"
 import { useStore } from "vuex"
@@ -67,6 +68,7 @@ export default {
     Category,
     Specialty,
     Client,
+    User,
   },
   props: {
     query: {

@@ -10,6 +10,7 @@ import Category from '@/store/Modules/Category'
 import Specialty from '@/store/Modules/Specialty'
 import Client from '@/store/Modules/Client'
 import Offer from '@/store/Modules/Offer'
+import User from '@/store/Modules/User'
 
 
 export default new Vuex.Store({
@@ -25,5 +26,6 @@ export default new Vuex.Store({
     Specialty,
     Client,
     Offer,
+    User
   },
 })

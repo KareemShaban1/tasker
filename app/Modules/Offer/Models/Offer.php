@@ -3,11 +3,13 @@
 namespace App\Modules\Offer\Models;
 
 use App\Modules\Language\Models\Language;
+use App\Modules\Offer\Database\Factories\OfferFactory;
 use App\Modules\TaskType\Models\TaskType;
 use App\Traits\Filter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class Offer extends Model
 {
@@ -44,6 +46,10 @@ class Offer extends Model
         return $this->belongsTo(Language::class,'language_id');
     }
 
+    public static function newFactory(): Factory
+    {
+        return new OfferFactory();
+    }
 
 
 }

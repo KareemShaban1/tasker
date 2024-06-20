@@ -91,6 +91,13 @@ onBeforeUnmount(() => {
 const navItems = {
   dashboard: [
     {
+      title: 'Dashboard',
+      icon: 'ri-dashboard-line',
+      to: '/dashboard',
+
+      // permissions: ['access-dashboard'],
+    },
+    {
       title: 'Country',
       icon: 'ri-earth-line',
       to: '/country',
@@ -120,14 +127,14 @@ const navItems = {
     },
     {
       title: 'taskType',
-      icon: 'ri-task-line',
+      icon: 'ri-list-check-3',
       to: '/taskType',
 
       // permissions: ['access-dashboard'],
     },
     {
       title: 'category',
-      icon: 'ri-task-line',
+      icon: 'ri-menu-search-line',
       to: '/category',
 
       // permissions: ['access-dashboard'],
@@ -142,14 +149,14 @@ const navItems = {
 
     {
       title: 'clients',
-      icon: 'ri-task-line',
+      icon: 'ri-user-line',
       to: '/client',
 
       // permissions: ['access-dashboard'],
     },
     {
       title: 'offers',
-      icon: 'ri-task-line',
+      icon: 'ri-bank-card-line',
       to: '/offer',
 
       // permissions: ['access-dashboard'],
@@ -159,6 +166,14 @@ const navItems = {
       title: 'tasks',
       icon: 'ri-task-line',
       to: '/task',
+
+      // permissions: ['access-dashboard'],
+    },
+
+    {
+      title: 'users',
+      icon: 'ri-user-line',
+      to: '/user',
 
       // permissions: ['access-dashboard'],
     },

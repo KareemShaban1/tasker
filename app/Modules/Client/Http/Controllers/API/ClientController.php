@@ -24,12 +24,17 @@ class ClientController extends Controller
     {
         // $this->authorize('viewAny', Client::class);
 
-        $cities = $this->service->list($request);
-        if ($cities instanceof JsonResponse) {
-            return $cities;
+        $clients = $this->service->list($request);
+        if ($clients instanceof JsonResponse) {
+            return $clients;
         }
 
-        return $this->returnJSON($cities, __('message.Client has been created successfully'));
+        return $clients->additional([
+            'code' => 200,
+            'status' => 'success',
+            'message' =>  __('message.clients have been retrieved successfully'),
+        ]);
+        // return $this->returnJSON($clients, __('message.Client has been created successfully'));
 
     }
 

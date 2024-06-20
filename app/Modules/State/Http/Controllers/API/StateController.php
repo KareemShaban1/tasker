@@ -29,7 +29,13 @@ class StateController extends Controller
             return $states;
         }
 
-        return $this->returnJSON($states, __('message.State has been created successfully'));
+        
+        return $states->additional([
+            'code' => 200,
+            'status' => 'success',
+            'message' =>  __('message.states have been retrieved successfully'),
+        ]);
+        // return $this->returnJSON($states, __('message.State has been created successfully'));
 
     }
 

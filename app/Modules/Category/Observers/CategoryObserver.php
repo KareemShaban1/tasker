@@ -3,6 +3,7 @@
 namespace App\Modules\Category\Observers;
 
 use App\Modules\Category\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryObserver
 {
@@ -12,11 +13,11 @@ class CategoryObserver
     public function created(Category $Category): void
     {
         //
-        // $user = Auth::user();
-        // if ($user) {
-        //     $Category->created_by = $user->id;
-        // }
-        $Category->created_by = 1;
+        $user = Auth::user();
+        if ($user) {
+            $Category->created_by = $user->id;
+        }
+        // $Category->created_by = 1;
         
     }
 
@@ -26,12 +27,12 @@ class CategoryObserver
     public function updated(Category $Category): void
     {
         //
-        // $user = Auth::user();
-        // if ($user) {
-        //     $Category->updated_at = $user->id;
-        // }
+        $user = Auth::user();
+        if ($user) {
+            $Category->updated_at = $user->id;
+        }
 
-        $Category->updated_at = 1;
+        // $Category->updated_at = 1;
     }
 
     /**
@@ -40,11 +41,11 @@ class CategoryObserver
     public function deleted(Category $Category): void
     {
         //
-        // $user = Auth::user();
-        // if ($user) {
-        //     $Category->deleted_at = $user->id;
-        // }
-        $Category->deleted_at = 1;
+        $user = Auth::user();
+        if ($user) {
+            $Category->deleted_at = $user->id;
+        }
+        // $Category->deleted_at = 1;
     }
 
     /**
