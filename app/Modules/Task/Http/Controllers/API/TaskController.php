@@ -34,7 +34,7 @@ class TaskController extends Controller
         return $tasks->additional([
             'code' => 200,
             'status' => 'success',
-            'message' =>  __('message.tasks have been retrieved successfully'),
+            'message' =>  __('message.Tasks have been retrieved successfully'),
         ]);
     }
 

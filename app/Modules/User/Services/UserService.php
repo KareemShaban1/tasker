@@ -105,6 +105,13 @@ class UserService extends BaseService
         try {
 
             $user = User::withTrashed()->findOrFail($id);
+            if (!$user->trashed()) {
+                return response()->json([
+                    'code' => 400,
+                    'status' => 'error',
+                    'message' => 'User is not soft-deleted',
+                ], 400);
+            }
             $user->restore();
 
             return new UserResource($user);

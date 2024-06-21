@@ -104,6 +104,13 @@ class ClientService extends BaseService
         try {
 
             $client = Client::withTrashed()->findOrFail($id);
+            if (!$client->trashed()) {
+                return response()->json([
+                    'code' => 400,
+                    'status' => 'error',
+                    'message' => 'Client is not soft-deleted',
+                ], 400);
+            }
             $client->restore();
 
             return new ClientResource($client);

@@ -101,6 +101,13 @@ class CountryService extends BaseService
         try {
 
             $country = Country::withTrashed()->findOrFail($id);
+            if (!$country->trashed()) {
+                return response()->json([
+                    'code' => 400,
+                    'status' => 'error',
+                    'message' => 'Country is not soft-deleted',
+                ], 400);
+            }
             $country->restore();
 
             return new CountryResource($country);

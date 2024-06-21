@@ -34,7 +34,7 @@ class LanguageController extends Controller
         return $languages->additional([
             'code' => 200,
             'status' => 'success',
-            'message' =>  __('message.languages have been retrieved successfully'),
+            'message' =>  __('message.Languages have been retrieved successfully'),
         ]);
     }
 

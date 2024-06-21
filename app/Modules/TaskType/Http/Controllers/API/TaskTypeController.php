@@ -35,7 +35,7 @@ class TaskTypeController extends Controller
         return $taskTypes->additional([
             'code' => 200,
             'status' => 'success',
-            'message' =>  __('message.taskTypes have been retrieved successfully'),
+            'message' =>  __('message.TaskTypes have been retrieved successfully'),
         ]);
     }
 

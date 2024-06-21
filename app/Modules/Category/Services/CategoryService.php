@@ -97,6 +97,13 @@ class CategoryService extends BaseService
         try {
 
             $category = Category::withTrashed()->findOrFail($id);
+            if (!$category->trashed()) {
+                return response()->json([
+                    'code' => 400,
+                    'status' => 'error',
+                    'message' => 'Category is not soft-deleted',
+                ], 400);
+            }
             $category->restore();
 
             return new CategoryResource($category);

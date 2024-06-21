@@ -32,7 +32,7 @@ class ClientController extends Controller
         return $clients->additional([
             'code' => 200,
             'status' => 'success',
-            'message' =>  __('message.clients have been retrieved successfully'),
+            'message' =>  __('message.Clients have been retrieved successfully'),
         ]);
         // return $this->returnJSON($clients, __('message.Client has been created successfully'));
 

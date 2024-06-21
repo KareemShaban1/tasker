@@ -34,7 +34,7 @@ class SpecialtyController extends Controller
         return $specialties->additional([
             'code' => 200,
             'status' => 'success',
-            'message' =>  __('message.specialties have been retrieved successfully'),
+            'message' =>  __('message.Specialties have been retrieved successfully'),
         ]);
         // return $this->returnJSON($specialties, __('message.Specialty has been created successfully'));
 

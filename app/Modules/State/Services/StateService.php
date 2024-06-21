@@ -101,6 +101,13 @@ class StateService extends BaseService
         try {
 
             $state = State::withTrashed()->findOrFail($id);
+            if (!$state->trashed()) {
+                return response()->json([
+                    'code' => 400,
+                    'status' => 'error',
+                    'message' => 'State is not soft-deleted',
+                ], 400);
+            }
             $state->restore();
 
             return new StateResource($state);

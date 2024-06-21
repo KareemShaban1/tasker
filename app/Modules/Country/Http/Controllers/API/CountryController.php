@@ -32,7 +32,7 @@ class CountryController extends Controller
         return $countries->additional([
             'code' => 200,
             'status' => 'success',
-            'message' =>  __('message.countries have been retrieved successfully'),
+            'message' =>  __('message.Countries have been retrieved successfully'),
         ]);
         // return $this->returnJSON($countries, __('message.Country has been created successfully'));
 

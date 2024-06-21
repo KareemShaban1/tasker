@@ -70,7 +70,6 @@ class OfferService extends BaseService
     {
         try {
 
-            
             $offer = Offer::findOrFail($id);
             $offer->update($data);
 
@@ -101,6 +100,13 @@ class OfferService extends BaseService
         try {
 
             $offer = Offer::withTrashed()->findOrFail($id);
+            if (!$offer->trashed()) {
+                return response()->json([
+                    'code' => 400,
+                    'status' => 'error',
+                    'message' => 'Offer is not soft-deleted',
+                ], 400);
+            }
             $offer->restore();
 
             return new OfferResource($offer);

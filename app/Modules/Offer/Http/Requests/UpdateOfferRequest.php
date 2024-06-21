@@ -23,6 +23,15 @@ class UpdateOfferRequest extends FormRequest
     {
         return [
             //
+            'task_type_id' => 'required|exists:task_types,id',
+            'offer' => 'required|numeric',
+            'description' => 'required|string|max:255',
+            'offer_limit' => 'required|string|max:100',
+            'is_active' => 'required|boolean',
+            'language_id' => 'required|exists:languages,id',
+            'created_by' => 'nullable|exists:users,id',
+            'updated_by' => 'nullable|exists:users,id',
+            'deleted_by' => 'nullable|exists:users,id',
         ];
     }
 }

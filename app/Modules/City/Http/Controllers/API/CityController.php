@@ -32,7 +32,7 @@ class CityController extends Controller
         return $cities->additional([
             'code' => 200,
             'status' => 'success',
-            'message' =>  __('message.users have been retrieved successfully'),
+            'message' =>  __('message.Cities have been retrieved successfully'),
         ]);
         // return $this->returnJSON($cities, __('message.City has been created successfully'));
 

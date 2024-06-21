@@ -101,6 +101,13 @@ class CityService extends BaseService
         try {
 
             $city = City::withTrashed()->findOrFail($id);
+            if (!$city->trashed()) {
+                return response()->json([
+                    'code' => 400,
+                    'status' => 'error',
+                    'message' => 'City is not soft-deleted',
+                ], 400);
+            }
             $city->restore();
 
             return new CityResource($city);

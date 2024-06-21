@@ -23,6 +23,21 @@ class StoreClientRequest extends FormRequest
     {
         return [
             //
+            'name' => 'required|string|max:150',
+            'email' => 'required|string|email|max:150|unique:clients,email',
+            'password' => 'required|string|min:8',
+            'phone' => 'required|string|max:100|unique:clients,phone',
+            'specialties' => 'required|string',
+            'description' => 'required|string',
+            'source' => 'required|string|max:100',
+            'is_active' => 'required|boolean',
+            'location' => 'required|string|max:255',
+            'country_id' => 'required|integer|exists:countries,id',
+            'city_id' => 'required|integer|exists:cities,id',
+            'state_id' => 'required|integer|exists:states,id',
+            'created_by' => 'nullable|exists:users,id',
+            'updated_by' => 'nullable|exists:users,id',
+            'deleted_by' => 'nullable|exists:users,id',
         ];
     }
 }

@@ -32,7 +32,7 @@ class CategoryController extends Controller
         return $categories->additional([
             'code' => 200,
             'status' => 'success',
-            'message' =>  __('message.categories have been retrieved successfully'),
+            'message' =>  __('message.Categories have been retrieved successfully'),
         ]);
         // return $this->returnJSON($categories, __('message.Category has been created successfully'));
 

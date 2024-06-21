@@ -34,7 +34,7 @@ class UserController extends Controller
         return $users->additional([
             'code' => 200,
             'status' => 'success',
-            'message' =>  __('message.users have been retrieved successfully'),
+            'message' =>  __('message.Users have been retrieved successfully'),
         ]);
     }
 

@@ -27,12 +27,11 @@ class OfferController extends Controller
         if ($offers instanceof JsonResponse) {
             return $offers;
         }
-
         
         return $offers->additional([
             'code' => 200,
             'status' => 'success',
-            'message' =>  __('message.offers have been retrieved successfully'),
+            'message' =>  __('message.Offers have been retrieved successfully'),
         ]);
         // return $this->returnJSON($offers, __('message.Offers has been created successfully'));
 

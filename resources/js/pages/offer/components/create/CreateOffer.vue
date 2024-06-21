@@ -144,9 +144,7 @@ export default {
     }
 
     const submit = () => {
-      console.log("test")
       if (validate(form)) {
-        console.log("test 2")
         store.dispatch('Offer/storeOffer', form.value).then(() => {
           store.dispatch('Offer/fetchAll', getQueryParamsFromUrl())
           resetForm()

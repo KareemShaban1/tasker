@@ -23,7 +23,6 @@ class LanguageService extends BaseService
             return (new LanguageCollection($languages))->withFullData(!($request->full_data == 'false'));
 
 
-
         } catch (\Exception $e) {
             return $this->handleException($e, __('message.Error happened while fetching Languages'));
         }
@@ -99,6 +98,13 @@ class LanguageService extends BaseService
         try {
 
             $language = Language::withTrashed()->findOrFail($id);
+            if (!$language->trashed()) {
+                return response()->json([
+                    'code' => 400,
+                    'status' => 'error',
+                    'message' => 'Language is not soft-deleted',
+                ], 400);
+            }
             $language->restore();
 
             return new LanguageResource($language);

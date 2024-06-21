@@ -99,6 +99,13 @@ class SpecialtyService extends BaseService
         try {
 
             $specialty = Specialty::withTrashed()->findOrFail($id);
+            if (!$specialty->trashed()) {
+                return response()->json([
+                    'code' => 400,
+                    'status' => 'error',
+                    'message' => 'Specialty is not soft-deleted',
+                ], 400);
+            }
             $specialty->restore();
 
             return new SpecialtyResource($specialty);

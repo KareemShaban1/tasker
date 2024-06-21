@@ -99,6 +99,13 @@ class TaskTypeService extends BaseService
         try {
 
             $taskType = TaskType::withTrashed()->findOrFail($id);
+            if (!$taskType->trashed()) {
+                return response()->json([
+                    'code' => 400,
+                    'status' => 'error',
+                    'message' => 'Task Type is not soft-deleted',
+                ], 400);
+            }
             $taskType->restore();
 
             return new TaskTypeResource($taskType);
